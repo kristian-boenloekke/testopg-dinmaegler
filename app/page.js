@@ -1,101 +1,189 @@
-import Image from "next/image";
+import { getCurrentUser } from '@/lib/auth';
+import Image from 'next/image';
+import CardEstate from '@/components/CardEstate';
+import CardAgent from '@/components/CardAgent';
+import Link from 'next/link';
+import FormSubscription from '@/components/FormSubscription';
+import Section from '@/components/Section';
 
-export default function Home() {
+
+const listItems = [
+  { "src": "/img/house-1.svg", "alt": "villa", "text1": "4829", "text2": "boliger solgt" },
+  { "src": "/img/house-2.svg", "alt": "villa", "text1": "14", "text2": "boliger til salg" },
+  { "src": "/img/house-3.svg", "alt": "villa", "text1": "Bestil et salgstjek", "text2": "Med et Din Mægler Salgstjek bliver du opdateret på værdien af din bolig." },
+  { "src": "/img/maps-and-flags-1.svg", "alt": "map", "text1": "74 butikker", "text2": "Hos Din Mægler er din bolig til salg i alle vores 74 butikker, som er fordelt rundt om i Danmark." },
+  { "src": "/img/subscribe-1.svg", "alt": "subscribe", "text1": "Tilmeld Køberkartotek", "text2": "Når du er tilmeldt vores køberkartotek, bliver du kontaktet inden en ny bolig bliver annonceret." },
+]
+
+export default async function Page() {
+  const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
+  const agents = await fetch('https://dinmaegler.onrender.com/agents').then(r => r.json())
+
+  function getRandomItems(arr, num) {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random())
+    return shuffled.slice(0, num)
+  }
+
+  const randomHomes = getRandomItems(homes, 4)
+  const randomAgents = getRandomItems(agents, 3)
+
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      {/* Hero */}
+      <section className='relative h-60 md:h-96 lg:h-[600px]'>
+        <div className='absolute inset-0 bg-[url("/img/hero-img-1.jpg")] bg-cover bg-center filter brightness-50 z-0' />
+        <div className=' relative w-full h-full flex flex-col justify-center items-center z-10'>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <h2 className='text-2xl md:text-4xl lg:text-6xl text-white font-semibold p-2 sm:p-6'>Søg efter din drømmebolig</h2>
+
+          <div className='bg-white p-4 flex flex-col gap-2 w-[80vw] lg:w-[60vw]'>
+            <p className='font-bold hidden sm:block'>Søg blandt 14 boliger til salg i 74 butikker</p>
+            <div>
+              <label htmlFor="search" className='text-xs'>Hvad skal din næste bolig indeholde</label>
+              <div className='flex flex-col gap-2 sm:flex-row'>
+                <input
+                  type="text"
+                  id='search'
+                  className='border border-gray-300 rounded-sm px-2 py-1 w-full text-xs'
+                  placeholder='Søg på fx glaskeramisk komfur, bryggers, kælder eller lignende'
+                />
+                <button className='bg-primary text-white p-2 px-8 text-xs rounded-sm'>Søg</button>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </section>
+
+      {/* Company Experience */}
+      <Section className={'flex flex-col gap-10'}>
+        <article className='flex gap-8 pb-6 border-b border-gray-300'>
+          <Image src="/img/experience.png" alt="customer" width={477} height={502} className='hidden sm:block w-80 h-80' />
+          <div className='flex flex-col gap-3'>
+            <h2 className='font-semibold text-primary2 text-2xl'>Vi har fulgt danskerne hjem i snart 4 årtier</h2>
+            <p className='text-primary font-semibold'>Det synes vi siger noget om os!</p>
+            <p className='text-primary3 text-sm'>The Earth quakes and the Heavens rattle; the beasts of nature flock together and the nations of men flock apart; volcanoes usher up heat while elsewhere water becomes ice and melts;</p>
+            <p className='text-primary3 text-sm'> And then on other days it just rains. <br /> Indeed do many things come to pass.</p>
+            <ul className='flex gap-12 sm:justify-start md:flex-row pt-6'>
+              {listItems.slice(0, 2).map((item, index) => (
+                <li className='flex gap-2' key={index}>
+                  <Image src={item.src} alt={item.alt} width={45} height={45} className='bg-lightblue p-2' />
+                  <p className='text-primary3 text-sm flex flex-col justify-between'>
+                    <span className='text-primary font-semibold text-base'>{item.text1} </span>
+                    {item.text2}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+        <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+          {listItems.slice(2, 5).map((item, index) => (
+            <li className='flex gap-1 items-start' key={index}>
+            <Image src={item.src} alt={item.alt} width={30} height={30} className='bg-lightblue p-1' />
+            <div>
+              <h2 className='text-primary2 font-semibold'>{item.text1}</h2>
+              <p className='text-primary3 text-sm'>{item.text2}</p>
+            </div>
+          </li>
+          ))} 
+        </ul>
+      </Section>
+      
+      {/* Featured Estates */}
+      <Section className={'bg-[#F8F8FB] flex flex-col'}>
+        <div className='flex flex-col gap-2 items-center pb-8'>
+          <h2 className='font-semibold text-primary2 text-2xl text-center'>Udvalgte Boliger</h2>
+          <p className='text-primary3 text-sm text-center max-w-lg'>There are many variations of passages of Lorem Ipsum available but the this in majority have suffered alteration in some</p>
+        </div>
+        <ul className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4'>
+          {randomHomes.map((home) => (
+            <li key={home.id} className='w-full'>
+              <CardEstate home={home} />
+
+            </li>
+          ))}
+        </ul>
+
+        <Link href={'/boliger'} className='self-center bg-primary text-white text-sm py-2 px-4 mt-10'>Se alle boliger</Link>
+      </Section>
+
+      {/* Mail Subscription Banner */}
+      <section className='bg-[url("/img/giant-building-with-sun.png")] h-40 relative'>
+        <div className='w-full h-full bg-primary/80 filter brightness-50 absolute inset-0'/>
+        <div className='global-padding w-full h-full flex flex-col justify-center items-center relative gap-6 md:flex-row'>
+          <p className='text-white text-lg sm:text-xl md:text-2xl font-semibold z-10 '>
+            Tilmeld dig vores nyhedsbrev og hold dig opdateret på boligmarkedet
+          </p>
+          <FormSubscription />
+        </div> 
+      </section>
+
+      {/* Featured Employees */}
+      <Section className={"flex flex-col"}>
+        <div className='flex flex-col gap-2 items-center pb-8'>
+          <h2 className='font-semibold text-primary2 text-2xl text-center'>Mød vores engagerede medarbejdere</h2>
+          <p className='text-primary3 text-sm text-center max-w-lg'>Din Mægler er garant for altid veluddannet assistance i dit boligsalg. Kontakt en af vores medarbejdere.</p>
+        </div>
+        <ul className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
+          {randomAgents.map((agent) => (
+            <li key={agent.id} className='w-full'>
+              <CardAgent agent={agent} />
+
+            </li>
+          ))}
+        </ul>
+        <Link href={'/medarbejdere'} className='self-center bg-primary text-white text-sm py-2 px-4 mt-10'>Se alle mæglere</Link>
+      </Section>
+
+      {/* Mobile App Banner */}
+      <section className='bg-primary text-white flex flex-col gap-6 md:flex-row px-6 md:px-[15vw] relative min-h-64'>
+        <div className='flex flex-col gap-4 text-white z-10 py-10'>
+          <h2 className='font-semibold text-2xl'>Hold dig opdateret på salgsprocessen</h2>
+          <p>
+            Når du sælger din bolig hos Din Mægler, kommunikerer du nemt med den ansvarlige mægler eller butik med vores app.
+            Her kan du også se statistik på interessen for din bolig i alle vores salgskanaler.
+          </p>
+          <div className='flex gap-3 text-xs font-semibold'>
+            <button className='flex gap-1 items-center bg-white text-primary py-2 px-4 '>
+              <Image src={'/img/play-store.svg'} alt="play-store" width={15} height={15} />
+              Google Play
+            </button>
+            <button className='flex gap-2 items-center bg-primary border border-white text-white py-2 px-4'>
+              <Image src={'/img/apple-store.svg'} alt="app-store" width={15} height={15} />
+              Apple Store
+            </button>
+          </div>
+        </div>
+        <Image
+          src={'/img/phones-3.png'}
+          alt='phone'
+          width={200}
+          height={200}
+          className='w-80 hidden md:block z-10 pt-10'
+        />
+        <div className='bg-[url("/img/phones-3.png")] bg-cover bg-center w-60 h-60 filter brightness-[25%] absolute bottom-0 right-4 md:hidden z-0'></div>
+      </section>
+
+    </>
+  )
 }
+
+
+
+{/* <div className='flex-1 relative'>
+          <Image
+            src={'/img/phones-1.png'}
+            alt='phone'
+            width={200}
+            height={200}
+            className='absolute bottom-0 z-10'
+          />
+          <Image
+            src={'/img/phones-2.png'}
+            alt='phone'
+            width={200}
+            height={200}
+            className='absolute bottom-0 left-36 z-0'
+          />
+        </div> */}
