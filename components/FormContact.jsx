@@ -1,51 +1,151 @@
+'use client'
+import { useState } from 'react'
+
 export default function FormContact() {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        newsletter: false,
+    })
+    const [errors, setErrors] = useState({})
+    const [statusMessage, setStatusMessage] = useState('')
+
+    function handleChange(e) {
+        const { id, value, type, checked } = e.target
+        setFormData((prev) => ({
+            ...prev,
+            [id]: type === 'checkbox' ? checked : value,
+        }))
+    }
+
+    function validateForm() {
+        const newErrors = {}
+        if (!formData.name || formData.name.trim() === '') newErrors.name = 'Navn er påkrævet'
+        if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Indtast en gyldig email'
+        if (!formData.subject || formData.subject.trim() === '') newErrors.subject = 'Emne er påkrævet'
+        if (!formData.message || formData.message.trim() === '') newErrors.message = 'Besked er påkrævet'
+
+        setErrors(newErrors)
+
+        
+        return Object.keys(newErrors).length === 0
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault()
+
+        if (!validateForm()) {
+            return 
+        }
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+
+            const result = await response.json()
+
+            if (response.ok) {
+                setStatusMessage('Formularen er sendt!')
+                setFormData({
+                    name: '',
+                    email: '',
+                    subject: '',
+                    message: '',
+                    newsletter: false,
+                })
+
+                console.log('Form Data:', formData)
+                
+            } else {
+                // Hvis server-side validerings fejl
+                setStatusMessage('')
+                console.error('Server errors:', result.errors)
+            }
+        } catch (error) {
+            console.error('Unexpected error:', error)
+            setStatusMessage('Noget gik galt. Prøv igen.')
+        }
+    }
+
     return (
-        <form action="" className="border border-gray-300 p-6 w-full">
+        <form onSubmit={handleSubmit} className="border border-gray-300 p-6 w-full">
             <div className="flex flex-col md:flex-row gap-4 pb-4">
                 <label htmlFor="name" className="flex flex-col gap-2 font-semibold w-full">
                     Navn
                     <input
                         type="text"
                         id="name"
-                        className="border border-gray-300 p-2 font-normal outline-none"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className={`border p-2 font-normal outline-none ${
+                            errors.name ? 'border-red-500' : 'border-gray-300'
+                        }`}
                         placeholder="Indtast dit navn"
                     />
+                    {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                 </label>
-                <label htmlFor="email" className="flex flex-col gap-2 font-semibold  w-full">
+                <label htmlFor="email" className="flex flex-col gap-2 font-semibold w-full">
                     Email
                     <input
                         type="email"
                         id="email"
-                        className="border border-gray-300 p-2 font-normal outline-none"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={`border p-2 font-normal outline-none ${
+                            errors.email ? 'border-red-500' : 'border-gray-300'
+                        }`}
                         placeholder="Indtast din email"
                     />
+                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                 </label>
             </div>
             <div className="flex flex-col gap-4">
-
                 <label htmlFor="subject" className="flex flex-col gap-2 font-semibold">
                     Emne
                     <input
                         type="text"
                         id="subject"
-                        className="border border-gray-300 p-2 font-normal outline-none"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        className={`border p-2 font-normal outline-none ${
+                            errors.subject ? 'border-red-500' : 'border-gray-300'
+                        }`}
                         placeholder="Indtast emne"
                     />
+                    {errors.subject && <p className="text-red-500 text-sm">{errors.subject}</p>}
                 </label>
 
                 <label htmlFor="message" className="flex flex-col gap-2 font-semibold">
                     Besked
                     <textarea
                         id="message"
-                        className="border border-gray-300 p-2 font-normal outline-none min-h-40"
-                        placeholder="Indtast emne"
+                        value={formData.message}
+                        onChange={handleChange}
+                        className={`border p-2 font-normal outline-none min-h-40 ${
+                            errors.message ? 'border-red-500' : 'border-gray-300'
+                        }`}
+                        placeholder="Indtast din besked"
                     />
+                    {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
                 </label>
             </div>
 
             <div className="flex flex-col gap-4 py-2">
                 <label htmlFor="newsletter" className="text-sm text-primary3 flex items-center">
-                    <input type="checkbox" name="newsletter" id="newsletter" className="mr-2" />
+                    <input
+                        type="checkbox"
+                        id="newsletter"
+                        checked={formData.newsletter}
+                        onChange={handleChange}
+                        className="mr-2"
+                    />
                     Ja tak, jeg vil gerne modtage Din Mæglers nyhedsbrev
                 </label>
 
@@ -56,9 +156,8 @@ export default function FormContact() {
                     Send Besked
                 </button>
 
+                {statusMessage && <p className="text-sm mt-4">{statusMessage}</p>}
             </div>
-
-
         </form>
     )
 }

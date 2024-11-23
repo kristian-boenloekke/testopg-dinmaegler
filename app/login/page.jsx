@@ -1,14 +1,14 @@
 // app/login/page.js
-'use server';
+'use server'
 
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 async function loginAction(formData) {
-  'use server';
+  'use server'
   
-  const email = formData.get('email');
-  const password = formData.get('password');
+  const email = formData.get('email')
+  const password = formData.get('password')
 
   try {
     const res = await fetch('https://dinmaegler.onrender.com/auth/local', {
@@ -18,12 +18,12 @@ async function loginAction(formData) {
         identifier: email,
         password: password,
       }),
-    });
+    })
 
-    const data = await res.json();
+    const data = await res.json()
 
     if (!res.ok) {
-      return { error: data.message || 'Authentication failed' };
+      return { error: data.message || 'Authentication failed' }
     }
 
     // Await the cookie setting
@@ -32,12 +32,12 @@ async function loginAction(formData) {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/'
-    });
+    })
 
     // For redirect to work in server actions, we need to return a redirect object
-    return redirect('/');
+    return redirect('/')
   } catch (error) {
-    return { error: 'An error occurred during login' };
+    return { error: 'An error occurred during login' }
   }
 }
 
@@ -75,5 +75,5 @@ export default async function Login() {
         </button>
       </form>
     </div>
-  );
+  )
 }

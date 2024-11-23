@@ -1,6 +1,8 @@
 import BannerHeading from "@/components/BannerHeading";
 import CardContact from "@/components/CardContact";
 import FormContact from "@/components/FormContact";
+import GoogleMapComponent from "@/components/GoogleMap";
+import Image from "next/image";
 
 const contactInfo = [
     { "image": "/img/phone.svg", "title": "Ring til os", "contact": "+45 7070 4000" },
@@ -13,11 +15,13 @@ export default function Kontakt() {
         <>
             <BannerHeading heading="Kontakt os" />
 
+            <Image src={'/img/favicon.svg'} alt="logo" width={100} height={100} className="mx-auto" />
+            
             <section className="px-global">
                 <h2 className="text-2xl font-semibold text-primary">Vi sidder klar til at besvare dine spørgsmål</h2>
                 <p>
-                    Der kan opstå tvivl om mange ting nå man gerne vil, eller er i gang med at sælge sin bolig. 
-                    <br/>Vores medarbejdere sider klar alle ugens dage til at svare på dine spørgsmål.
+                    Der kan opstå tvivl om mange ting nå man gerne vil, eller er i gang med at sælge sin bolig.
+                    <br />Vores medarbejdere sider klar alle ugens dage til at svare på dine spørgsmål.
                 </p>
             </section>
 
@@ -29,7 +33,7 @@ export default function Kontakt() {
 
             </section>
 
-            <img src="/img/map.png" alt="map" className="w-full max-h-[40vh] pt-5"/>
+            <GoogleMapComponent lat={55.64150539850607} lng={12.080512028050654} height="250px" />
         </>
     )
 }

@@ -5,6 +5,7 @@ import CardAgent from '@/components/CardAgent';
 import Link from 'next/link';
 import FormSubscription from '@/components/FormSubscription';
 import Section from '@/components/Section';
+import SearchForm from '@/components/FormSearch';
 
 
 const listItems = [
@@ -39,18 +40,7 @@ export default async function Page() {
 
           <div className='bg-white p-4 flex flex-col gap-2 w-[80vw] lg:w-[60vw]'>
             <p className='font-bold hidden sm:block'>Søg blandt 14 boliger til salg i 74 butikker</p>
-            <div>
-              <label htmlFor="search" className='text-xs'>Hvad skal din næste bolig indeholde</label>
-              <div className='flex flex-col gap-2 sm:flex-row'>
-                <input
-                  type="text"
-                  id='search'
-                  className='border border-gray-300 rounded-sm px-2 py-1 w-full text-xs'
-                  placeholder='Søg på fx glaskeramisk komfur, bryggers, kælder eller lignende'
-                />
-                <button className='bg-primary text-white p-2 px-8 text-xs rounded-sm'>Søg</button>
-              </div>
-            </div>
+            <SearchForm />
           </div>
         </div>
       </section>
@@ -105,7 +95,7 @@ export default async function Page() {
           ))}
         </ul>
 
-        <Link href={'/boliger'} className='self-center bg-primary text-white text-sm py-2 px-4 mt-10'>Se alle boliger</Link>
+        <Link href={'/boliger'} className="bg-primary text-white font-semibold px-4 py-3 mt-10 self-center">Se alle boliger</Link>
       </Section>
 
       {/* Mail Subscription Banner */}
@@ -133,7 +123,7 @@ export default async function Page() {
             </li>
           ))}
         </ul>
-        <Link href={'/medarbejdere'} className='self-center bg-primary text-white text-sm py-2 px-4 mt-10'>Se alle mæglere</Link>
+        <Link href={'/medarbejdere'} className="bg-primary text-white font-semibold px-4 py-3 mt-10 self-center">Se alle mæglere</Link>
       </Section>
 
       {/* Mobile App Banner */}

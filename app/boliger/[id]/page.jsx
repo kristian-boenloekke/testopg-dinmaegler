@@ -3,12 +3,24 @@ import EstateMenu from '../_components/EstateMenu';
 import Image from 'next/image'
 import DetailTable from '../_components/DetailTable';
 import CardEstate from '@/components/CardEstate';
+
+
+export async function generateStaticParams() {
+    const homes = await fetch('https://dinmaegler.onrender.com/homes')
+      .then(r => r.json())
+    
+    return homes.map((home) => ({
+      id: home.id.toString(),
+    }))
+  }
 export default async function Home({ params }) {
     const awaitedParams = await params
     const id = awaitedParams.id
+    // const id = params.id
     const home = await fetch(`https://dinmaegler.onrender.com/homes/${id}`).then(r => r.json())
     const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
-
+    
+    
 
 
     return (
@@ -19,7 +31,7 @@ export default async function Home({ params }) {
                 alt={home.images[0].name}
                 width={1400}
                 height={934}
-                className='w-[100vw] max-h-[500px] object-cover'
+                className='w-[100vw] max-h-[500px] object-cover filter'
                 priority
             />
 
@@ -46,7 +58,7 @@ export default async function Home({ params }) {
                 </div>
             </section>
 
-            <div className='px-global pb-10 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8'>
+            <div className='px-global pb-10 md:pb-20 grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-6 lg:gap-12'>
                 <section>
                     <h2 className='text-primary2 text-2xl font-semibold py-4'>Beskrivelse</h2>
                     <p className='text-sm leading-6'>{home.description}</p>
@@ -54,13 +66,15 @@ export default async function Home({ params }) {
 
                 <section>
                     <h2 className='text-primary2 text-2xl font-semibold pb-4'>Ansvarlig mægler</h2>
+                    <div className='border'>
                     <CardAgent agent={home.agent} variant />
+                    </div>
                 </section>
             </div>
-            <ul className="flex overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar">
+            <ul className="flex overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar shadow-xl">
                 {homes.map((home) => (
                     <li key={home.id} className="inline-block">
-                        <CardEstate home={home} />
+                        <CardEstate home={home} variant="small" />
                     </li>
                 ))}
             </ul>

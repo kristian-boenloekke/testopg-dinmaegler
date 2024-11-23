@@ -21,9 +21,11 @@ export default function CardEstate({ home, variant = false }) {
     return (
         <>
             {variant === 'favorite' ?
+
+                // Horizontal-row Card for Favorites list
                 <article className={`flex flex-col shadow-md 
                     lg:p-4 lg:flex-row lg:justify-between`
-                    }>
+                }>
                     <Link href={`/boliger/${home.id}`} className="flex flex-col lg:flex-row lg:justify-between">
                         <Image src={home.images[0].url} alt={home.images[0].name} width={1400} height={934}
                             className=" w-full h-40 object-cover lg:h-40 lg:min-w-64"
@@ -57,22 +59,33 @@ export default function CardEstate({ home, variant = false }) {
                     </div>
                 </article>
 
-
+                // Small Card for Horizontal-scroll List
                 : variant === 'small' ?
-                    <article className="flex flex-col shadow-md"></article>
-                
-                
+                    <Link href={`/boliger/${home.id}`}>
+                        <article className="flex flex-col min-w-60">
+                            <div className="relative w-full h-full">
+                                <Image src={home.images[0].url} alt={home.images[0].name} width={1400} height={934}
+                                    className="w-full h-40 object-cover filter brightness-90 hover:brightness-100 transition duration-300 ease-in-out"
+                                />
+                                {/* <LikeButton className={"absolute top-2 right-2"} /> */}
+                            </div>
+                            <div className="flex flex-col p-2 gap-1 border-b border-r">
+                                <h2 className="font-semibold">{home.adress1}</h2>
+                                <p className="flex gap-1 text-xs text-primary3"><span>{home.postalcode}</span>{home.city}</p>
+                            </div>
+                        </article>
+                    </Link>
                     :
-                    <article className="flex flex-col shadow-md">
-                        <div className="relative w-full h-full">
+
+                    // Default Card
+                    <article className="flex flex-col shadow-md relative w-full h-full">
+                        <LikeButton className={"absolute top-2 right-2"} />
+                        <Link href={`/boliger/${home.id}`}>
                             <Image src={home.images[0].url} alt={home.images[0].name} width={1400} height={934}
                                 className="w-full h-40 object-cover"
                             />
-                            {/* {user && <LikeButton className={"absolute top-2 right-2"} />} */}
-                        </div>
-                        <Link href={`/boliger/${home.id}`}>
-                            <div className="flex flex-col p-4 gap-2">
-                                <h2 className="font-semibold">{home.adress1}</h2>
+                            <div className="flex flex-col py-2 px-4 gap-2">
+                                <h2 className="font-semibold">{home.adress1} {home?.adress2}</h2>
                                 <p className="flex gap-1 text-xs text-primary3"><span>{home.postalcode}</span>{home.city}</p>
                                 <div className="flex gap-1 text-xs border-b border-gray-300 pb-2 ">
                                     <p className="font-semibold">{home.type}</p>

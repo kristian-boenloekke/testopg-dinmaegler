@@ -1,7 +1,10 @@
 import Image from "next/image"
 import CardContact from "./CardContact"
 import Link from "next/link"
+import { getCurrentUser } from "@/lib/auth"
 export default function Footer() {
+
+    const user = getCurrentUser()
     return (
         <>
             <footer className="footer-grid">
@@ -42,9 +45,10 @@ export default function Footer() {
                                 <li>
                                     <Link href={'/kontakt'}>Kontakt os</Link>
                                 </li>
+                                {!user &&
                                 <li>
                                     <Link href={'/login'}>Log ind / bliv bruger</Link>
-                                </li>
+                                </li>}
                             </ul>
                         </nav>
                         <p className="flex flex-col text-sm/4 text-[#7B7B7B]">

@@ -5,7 +5,7 @@ export default function CardAgent({ agent, variant = false }) {
     return (
         <>
             {variant ?
-                <article className='grid grid-cols-2 gap-4 border border-gray-300 p-2 min-h-60'>
+                <article className='grid grid-cols-1 sm:grid-cols-2 gap-4 p-2 min-h-60'>
                     <Link href={`/medarbejdere/${agent.id}`} className='relative'>
                         <Image src={agent.image.url} alt={agent.name} width={800} height={533} className="w-full h-full object-cover" />
                         <Image src={'/img/social.png'} alt='social media' width={100} height={40} className='absolute bottom-3 left-0' />
@@ -14,7 +14,7 @@ export default function CardAgent({ agent, variant = false }) {
                         <h2 className=' font-semibold py-2'>{agent.name}</h2>
                         <p className='text-sm text-[#7B7B7B] border-b border-gray-300 pb-4'>{agent.title}</p>
 
-                        <a href="mailto:4000@dinmaegler.com" className="flex gap-2 items-center text-sm pt-4">
+                        <a href="mailto:4000@dinmaegler.com" className="flex gap-2 items-center text-sm pt-4 overflow-x-hidden">
                             <Image src="/img/paper-plane-black.png" alt="paper-plane" width={12} height={12} />
                             <p>{agent.email}</p>
                         </a>

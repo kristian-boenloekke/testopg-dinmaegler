@@ -6,6 +6,8 @@ import LogoutButton from "./LogoutButton";
 
 export default async function Header() {
     const user = await getCurrentUser()
+    console.log(user);
+    
     return (
         <header>
             <div className="bg-primary text-white hidden md:flex w-full justify-between p-4 px-6  lg:px-[15vw]">
