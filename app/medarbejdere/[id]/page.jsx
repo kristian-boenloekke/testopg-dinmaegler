@@ -4,14 +4,20 @@ import FormContact from "@/components/FormContact";
 import SearchForm from "@/components/FormSearch";
 import Section from "@/components/Section";
 
+export async function generateStaticParams() {
+        const agents = await fetch('https://dinmaegler.onrender.com/agents')
+            .then(r => r.json())
+            .then((data) => data)
+        
+        return agents.map((agent) => ({
+            id: agent.id.toString(),
+        }))
+    }
+
 export default async function Medarbejder({ params }) {
     const awaitedParams = await params
     const id = awaitedParams.id
     const agent = await fetch(`https://dinmaegler.onrender.com/agents/${id}`).then(r => r.json())
-    // const detailUrl = agent.url
-    // const detailReponse = await fetch(detailUrl)
-    console.log("agentData:", agent);
-
 
     return (
         <>

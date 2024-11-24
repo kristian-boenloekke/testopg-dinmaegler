@@ -16,7 +16,6 @@ export async function generateStaticParams() {
 export default async function Home({ params }) {
     const awaitedParams = await params
     const id = awaitedParams.id
-    // const id = params.id
     const home = await fetch(`https://dinmaegler.onrender.com/homes/${id}`).then(r => r.json())
     const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
     
@@ -31,7 +30,7 @@ export default async function Home({ params }) {
                 alt={home.images[0].name}
                 width={1400}
                 height={934}
-                className='w-[100vw] max-h-[500px] object-cover filter'
+                className='w-[100vw] max-h-[500px] object-cover'
                 priority
             />
 

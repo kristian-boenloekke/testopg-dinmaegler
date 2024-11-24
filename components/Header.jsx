@@ -6,7 +6,6 @@ import LogoutButton from "./LogoutButton";
 
 export default async function Header() {
     const user = await getCurrentUser()
-    console.log(user);
     
     return (
         <header>
@@ -37,7 +36,7 @@ export default async function Header() {
             </div>
             <div className="flex items-center justify-between p-4 px-6 lg:px-[15vw]">
 
-                <Link href={'/'}><Image src="/img/logo.png" alt="logo" width={160} height={160} /></Link>
+                <Link href={'/'}><Image src="/img/logo.png" alt="logo" width={160} height={160} priority/></Link>
 
                 <nav className="hidden md:flex gap-3">
                     <Link href={'/boliger'}>Boliger til salg</Link>

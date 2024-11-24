@@ -7,33 +7,62 @@ import FormSubscription from '@/components/FormSubscription';
 import Section from '@/components/Section';
 import SearchForm from '@/components/FormSearch';
 
+export const revalidate = 3600; // Revalidate every hour since data changes infrequently
 
-const listItems = [
-  { "src": "/img/house-1.svg", "alt": "villa", "text1": "4829", "text2": "boliger solgt" },
-  { "src": "/img/house-2.svg", "alt": "villa", "text1": "14", "text2": "boliger til salg" },
-  { "src": "/img/house-3.svg", "alt": "villa", "text1": "Bestil et salgstjek", "text2": "Med et Din Mægler Salgstjek bliver du opdateret på værdien af din bolig." },
-  { "src": "/img/maps-and-flags-1.svg", "alt": "map", "text1": "74 butikker", "text2": "Hos Din Mægler er din bolig til salg i alle vores 74 butikker, som er fordelt rundt om i Danmark." },
-  { "src": "/img/subscribe-1.svg", "alt": "subscribe", "text1": "Tilmeld Køberkartotek", "text2": "Når du er tilmeldt vores køberkartotek, bliver du kontaktet inden en ny bolig bliver annonceret." },
-]
+async function fetchHomes() {
+  const response = await fetch('https://dinmaegler.onrender.com/homes', {
+    next: { revalidate: 3600 }
+  });
+  if (!response.ok) throw new Error('Failed to fetch homes');
+  return response.json();
+}
+
+async function fetchAgents() {
+  const response = await fetch('https://dinmaegler.onrender.com/agents', {
+    next: { revalidate: 3600 }
+  });
+  if (!response.ok) throw new Error('Failed to fetch agents');
+  return response.json();
+}
+
+function getRandomItems(arr, num) {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, num);
+}
+
+
+
 
 export default async function Page() {
-  const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
-  const agents = await fetch('https://dinmaegler.onrender.com/agents').then(r => r.json())
+  // const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
+  // const agents = await fetch('https://dinmaegler.onrender.com/agents').then(r => r.json())
 
-  function getRandomItems(arr, num) {
-    const shuffled = [...arr].sort(() => 0.5 - Math.random())
-    return shuffled.slice(0, num)
-  }
+  const [homes, agents] = await Promise.all([
+    fetchHomes(),
+    fetchAgents()
+  ])
+  // function getRandomItems(arr, num) {
+  //   const shuffled = [...arr].sort(() => 0.5 - Math.random())
+  //   return shuffled.slice(0, num)
+  // }
 
   const randomHomes = getRandomItems(homes, 4)
   const randomAgents = getRandomItems(agents, 3)
+
+  const listItems = [
+    { "src": "/img/house-1.svg", "alt": "villa", "text1": "4829", "text2": "boliger solgt" },
+    { "src": "/img/house-2.svg", "alt": "villa", "text1": "14", "text2": "boliger til salg" },
+    { "src": "/img/house-3.svg", "alt": "villa", "text1": "Bestil et salgstjek", "text2": "Med et Din Mægler Salgstjek bliver du opdateret på værdien af din bolig." },
+    { "src": "/img/maps-and-flags-1.svg", "alt": "map", "text1": "74 butikker", "text2": "Hos Din Mægler er din bolig til salg i alle vores 74 butikker, som er fordelt rundt om i Danmark." },
+    { "src": "/img/subscribe-1.svg", "alt": "subscribe", "text1": "Tilmeld Køberkartotek", "text2": "Når du er tilmeldt vores køberkartotek, bliver du kontaktet inden en ny bolig bliver annonceret." },
+  ]
 
 
   return (
     <>
       {/* Hero */}
       <section className='relative h-60 md:h-96 lg:h-[600px]'>
-        <div className='absolute inset-0 bg-[url("/img/hero-img-1.jpg")] bg-cover bg-center filter brightness-50 z-0' />
+        <Image src="/img/hero-img-1.jpg" alt="hero" width={800} height={533} priority className="w-full h-full object-cover absolute inset-0 filter brightness-50 z-0" />
         <div className=' relative w-full h-full flex flex-col justify-center items-center z-10'>
 
           <h2 className='text-2xl md:text-4xl lg:text-6xl text-white font-semibold p-2 sm:p-6'>Søg efter din drømmebolig</h2>

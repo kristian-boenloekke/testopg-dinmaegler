@@ -14,7 +14,7 @@ export default function CardAgent({ agent, variant = false }) {
                         <h2 className=' font-semibold py-2'>{agent.name}</h2>
                         <p className='text-sm text-[#7B7B7B] border-b border-gray-300 pb-4'>{agent.title}</p>
 
-                        <a href="mailto:4000@dinmaegler.com" className="flex gap-2 items-center text-sm pt-4 overflow-x-hidden">
+                        <a href={`mailto:${agent.email}`} className="flex gap-2 items-center text-sm pt-4 overflow-x-hidden">
                             <Image src="/img/paper-plane-black.png" alt="paper-plane" width={12} height={12} />
                             <p>{agent.email}</p>
                         </a>

@@ -47,7 +47,7 @@ export default async function SearchResults({ searchParams }) {
                 <p className="text-sm">Ingen boliger matcher &quot;{query}&quot;.</p>
             ) : (
                 <div>
-                <p className="py-2 text-sm">Boliger som matcher &quot;{query}&quot;:</p> 
+                <p className="py-2 text-sm">Boliger som matcher &quot;<span className="font-semibold">{query}</span>&quot;:</p> 
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {filteredHomes.map((home) => (
                         <li key={home.id}>
