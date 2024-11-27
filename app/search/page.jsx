@@ -4,7 +4,7 @@ import SearchForm from "@/components/FormSearch";
 
 export const metadata = {
     title: 'Søg',
-    alternate: {
+    alternates: {
         canonical: 'https://dinmaegler.vercel.app/search',
     }
 }

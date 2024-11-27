@@ -3,7 +3,7 @@ import FilteredHomes from '@/components/FilteredHomes'
 
 export const metadata = {
     title: 'Boliger',
-    alternate: {
+    alternates: {
         canonical: 'https://dinmaegler.vercel.app/boliger',
     }
 }

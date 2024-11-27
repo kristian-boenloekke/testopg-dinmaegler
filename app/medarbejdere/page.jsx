@@ -4,7 +4,7 @@ import CardAgent from "@/components/CardAgent"
 
 export const metadata = {
     title: 'Medarbejdere',
-    alternate: {
+    alternates: {
         canonical: 'https://dinmaegler.vercel.app/medarbejdere',
     }
 }

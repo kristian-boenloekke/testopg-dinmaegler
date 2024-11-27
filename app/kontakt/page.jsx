@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const metadata = {
     title: 'Kontakt',
-    alternate: {
+    alternates: {
         canonical: 'https://dinmaegler.vercel.app/kontakt',
     }
 }
