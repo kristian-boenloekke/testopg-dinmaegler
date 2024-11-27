@@ -1,5 +1,10 @@
 import BannerHeading from "@/components/BannerHeading"
 import CardAgent from "@/components/CardAgent"
+
+
+export const metadata = {
+    title: 'Medarbejdere',
+}
 export default async function Medarbejdere() {
     const agents = await fetch('https://dinmaegler.onrender.com/agents').then(r => r.json())
     return (

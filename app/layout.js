@@ -65,9 +65,33 @@ export const metadata = {
   },
 }
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Din Mægler",
+  url: "https://dinmaegler.vercel.app",
+  telephone: "+45 70 00 00 00",
+  description: "Din Mægler Roskilde, er din boligbutik i lokalområdet",
+  email: "4000@dinmaegler.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Stændertorvet 78",
+    addressLocality: "Roskilde",
+    addressCountry: "DK",
+    postalCode: "4000",
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script
+          key={"structured-data"}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -78,10 +102,6 @@ export default function RootLayout({ children }) {
             <Footer />
           </AuthProvider>
         </ToastProvider>
-        {/* <Script
-          src="/heavy-analytics.js"
-          strategy="lazyOnload"
-        /> */}
       </body>
     </html>
   );

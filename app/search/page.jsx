@@ -1,5 +1,10 @@
+import BannerHeading from "@/components/BannerHeading";
 import CardEstate from "@/components/CardEstate";
 import SearchForm from "@/components/FormSearch";
+
+export const metadata = {
+    title: 'Søg',
+}
 
 export default async function SearchResults({ searchParams }) {
     const awaitedParams = await searchParams
@@ -41,6 +46,8 @@ export default async function SearchResults({ searchParams }) {
     )
 
     return (
+        <>
+            <BannerHeading heading={"Søg bolig"} />
         <div className="min-h-[60vh] px-global global-padding flex flex-col gap-6">
             <SearchForm />
             {filteredHomes.length === 0 ? (
@@ -59,6 +66,7 @@ export default async function SearchResults({ searchParams }) {
             )}
             
         </div>
+        </>
     )
 
 }

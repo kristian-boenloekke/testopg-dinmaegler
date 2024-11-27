@@ -4,6 +4,10 @@ import { Unsubscribe } from "@/components/SubscriptionRCC";
 import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
+export const metadata = {
+    title: 'Mine favoritter',
+}
+
 
 export default async function Favorites() {
     const user = await getCurrentUser()

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useToast } from '@/contexts/ToastProvider'
 import BannerHeading from '@/components/BannerHeading'
+
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -45,7 +46,7 @@ export default function Login() {
 
   return (
     <>
-      <BannerHeading heading="Account login" />
+      <BannerHeading heading="Log ind" />
     <div className="flex w-full justify-center items-center py-20">
       <div className='px-20 p-10 flex flex-col gap-2 shadow-md'>
         <h2 className='text-center text-2xl font-semibold py-4'>Log ind på din konto</h2>

@@ -80,7 +80,7 @@ export default function FormContact() {
 
     return (
         <form onSubmit={handleSubmit} className="border border-gray-300 p-6 w-full">
-            <div className="flex flex-col md:flex-row gap-4 pb-4">
+            <div className="flex flex-col lg:flex-row gap-4 pb-4">
                 <label htmlFor="name" className="flex flex-col gap-2 font-semibold w-full">
                     Navn
                     <input

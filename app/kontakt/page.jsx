@@ -4,6 +4,10 @@ import FormContact from "@/components/FormContact";
 import GoogleMapComponent from "@/components/GoogleMap";
 import Image from "next/image";
 
+export const metadata = {
+    title: 'Kontakt',
+}
+
 const contactInfo = [
     { "image": "/img/phone.svg", "title": "Ring til os", "contact": "+45 7070 4000" },
     { "image": "/img/paper-plane.svg", "title": "Send en mail", "contact": "4000@dinmaegler.com" },
@@ -17,7 +21,7 @@ export default function Kontakt() {
 
             <Image src={'/img/favicon.svg'} alt="logo" width={100} height={100} className="mx-auto" />
             
-            <section className="px-global flex flex-col gap-4">
+            <section className="px-global py-8 flex flex-col gap-4">
                 <h2 className="text-2xl font-semibold text-primary">Vi sidder klar til at besvare dine spørgsmål</h2>
                 <div className="bg-primary h-[3px] w-20"/>
                 <p>

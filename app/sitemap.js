@@ -32,6 +32,14 @@ export default async function sitemap() {
             url: 'https://dinmaegler.vercel.app/bruger/favoritter',
             lastModified: new Date(),
         },
+        {
+            url: 'https://dinmaegler.vercel.app/login',
+            lastModified: new Date(),
+        },
+        {
+            url: 'https://dinmaegler.vercel.app/search',
+            lastModified: new Date(),
+        },
         ...agentUrls,
         ...homeUrls
 
