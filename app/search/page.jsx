@@ -4,6 +4,9 @@ import SearchForm from "@/components/FormSearch";
 
 export const metadata = {
     title: 'Søg',
+    alternate: {
+        canonical: 'https://dinmaegler.vercel.app/search',
+    }
 }
 
 export default async function SearchResults({ searchParams }) {

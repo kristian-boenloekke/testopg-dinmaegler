@@ -6,6 +6,9 @@ import { redirect } from "next/navigation";
 
 export const metadata = {
     title: 'Mine favoritter',
+    alternate: {
+        canonical: 'https://dinmaegler.vercel.app/bruger/favoritter',
+    }
 }
 
 
