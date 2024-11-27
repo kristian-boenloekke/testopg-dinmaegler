@@ -1,11 +1,12 @@
-import { getCurrentUser } from "@/lib/auth";
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenu from "./BurgerMenu";
 import LogoutButton from "./LogoutButton";
+import { useAuth } from "@/contexts/AuthProvider";
 
-export default async function Header() {
-    const user = await getCurrentUser()
+export default function Header() {
+    const {user } = useAuth()
     
     return (
         <header>
@@ -36,7 +37,14 @@ export default async function Header() {
             </div>
             <div className="flex items-center justify-between p-4 px-6 lg:px-[15vw]">
 
-                <Link href={'/'}><Image src="/img/logo.png" alt="logo" width={160} height={160} priority/></Link>
+                <Link href={'/'}>
+                    <Image 
+                        src="/img/logo.png" alt="logo" 
+                        width={300} height={60}
+                        className="w-40 h-auto"
+                        priority
+                    />
+                </Link>
 
                 <nav className="hidden md:flex gap-3">
                     <Link href={'/boliger'}>Boliger til salg</Link>
@@ -48,7 +56,6 @@ export default async function Header() {
                 <BurgerMenu user={user} />
 
             </div>
-
 
         </header>
     )

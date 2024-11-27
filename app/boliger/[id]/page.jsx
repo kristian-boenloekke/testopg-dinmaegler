@@ -59,7 +59,7 @@ export default async function Home({ params }) {
 
             <div className='px-global pb-10 md:pb-20 grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-6 lg:gap-12'>
                 <section>
-                    <h2 className='text-primary2 text-2xl font-semibold py-4'>Beskrivelse</h2>
+                    <h2 className='text-primary2 text-2xl font-semibold pb-4'>Beskrivelse</h2>
                     <p className='text-sm leading-6'>{home.description}</p>
                 </section>
 

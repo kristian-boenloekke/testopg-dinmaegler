@@ -2,7 +2,9 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+// import Script from 'next/script';
 import { AuthProvider } from "@/contexts/AuthProvider";
+import { ToastProvider } from "@/contexts/ToastProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,11 +28,17 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <Header />
-          {children}
-          <Footer />
-        </AuthProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AuthProvider>
+        </ToastProvider>
+        {/* <Script
+          src="/heavy-analytics.js"
+          strategy="lazyOnload"
+        /> */}
       </body>
     </html>
   );

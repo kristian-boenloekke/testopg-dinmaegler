@@ -3,9 +3,10 @@ import Image from 'next/image';
 import CardEstate from '@/components/CardEstate';
 import CardAgent from '@/components/CardAgent';
 import Link from 'next/link';
-import FormSubscription from '@/components/FormSubscription';
 import Section from '@/components/Section';
 import SearchForm from '@/components/FormSearch';
+import { Subscribe } from '@/components/SubscriptionRCC';
+
 
 export const revalidate = 3600; // Revalidate every hour since data changes infrequently
 
@@ -46,6 +47,10 @@ export default async function Page() {
   //   return shuffled.slice(0, num)
   // }
 
+  const user = await getCurrentUser()
+  console.log(user);
+  
+
   const randomHomes = getRandomItems(homes, 4)
   const randomAgents = getRandomItems(agents, 3)
 
@@ -81,8 +86,8 @@ export default async function Page() {
           <div className='flex flex-col gap-3'>
             <h2 className='font-semibold text-primary2 text-2xl'>Vi har fulgt danskerne hjem i snart 4 årtier</h2>
             <p className='text-primary font-semibold'>Det synes vi siger noget om os!</p>
-            <p className='text-primary3 text-sm'>The Earth quakes and the Heavens rattle; the beasts of nature flock together and the nations of men flock apart; volcanoes usher up heat while elsewhere water becomes ice and melts;</p>
-            <p className='text-primary3 text-sm'> And then on other days it just rains. <br /> Indeed do many things come to pass.</p>
+            <p className='text-primary3 text-sm'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has normal distribution.</p>
+            <p className='text-primary3 text-sm'> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
             <ul className='flex gap-12 sm:justify-start md:flex-row pt-6'>
               {listItems.slice(0, 2).map((item, index) => (
                 <li className='flex gap-2' key={index}>
@@ -134,7 +139,7 @@ export default async function Page() {
           <p className='text-white text-lg sm:text-xl md:text-2xl font-semibold z-10 '>
             Tilmeld dig vores nyhedsbrev og hold dig opdateret på boligmarkedet
           </p>
-          <FormSubscription />
+          <Subscribe />
         </div> 
       </section>
 
@@ -188,21 +193,3 @@ export default async function Page() {
   )
 }
 
-
-
-{/* <div className='flex-1 relative'>
-          <Image
-            src={'/img/phones-1.png'}
-            alt='phone'
-            width={200}
-            height={200}
-            className='absolute bottom-0 z-10'
-          />
-          <Image
-            src={'/img/phones-2.png'}
-            alt='phone'
-            width={200}
-            height={200}
-            className='absolute bottom-0 left-36 z-0'
-          />
-        </div> */}

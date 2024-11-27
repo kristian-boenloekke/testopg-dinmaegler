@@ -2,7 +2,7 @@
 const contactInfo = [
     { "image": "/img/phone.svg", "title": "Ring til os", "contact": "+45 7070 4000" },
     { "image": "/img/paper-plane.svg", "title": "Send en mail", "contact": "4000@dinmaegler.com" },
-    { "image": "/img/maps-and-flags-1.svg", "title": "Besøg butikken", "contact": "Stændertorvet 78, 4000 Roskilde" },
+    { "image": "/img/flag-white.svg", "title": "Besøg butikken", "contact": "Stændertorvet 78, 4000 Roskilde" },
 ]
 
 export default function CardContact({ variant = false }) {

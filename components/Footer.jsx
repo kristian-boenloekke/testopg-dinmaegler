@@ -12,7 +12,11 @@ export default function Footer() {
                 <div className={`first-row 
                 flex flex-col p-6 gap-6 md:px-[15vw]`}>
 
-                    <Image src="/img/logo.png" alt="logo" width={200} height={200} />
+                    <Image
+                        src="/img/logo.png" alt="logo"
+                        width={300} height={60} priority
+                        className="w-40 h-auto"
+                    />
                     <p className="text-sm">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words.</p>
                 </div>
 
@@ -46,9 +50,9 @@ export default function Footer() {
                                     <Link href={'/kontakt'}>Kontakt os</Link>
                                 </li>
                                 {!user &&
-                                <li>
-                                    <Link href={'/login'}>Log ind / bliv bruger</Link>
-                                </li>}
+                                    <li>
+                                        <Link href={'/login'}>Log ind / bliv bruger</Link>
+                                    </li>}
                             </ul>
                         </nav>
                         <p className="flex flex-col text-sm/4 text-[#7B7B7B]">
@@ -63,7 +67,7 @@ export default function Footer() {
 
             {/* <style>
                 {`
-                    .grid-footer {
+                    .footer-grid {
                     display: grid;
                     grid-template-columns: 1fr;
                     grid-template-rows: 0.5fr 1fr 1fr 0.2fr;

@@ -8,7 +8,7 @@ export default function CardAgent({ agent, variant = false }) {
                 <article className='grid grid-cols-1 sm:grid-cols-2 gap-4 p-2 min-h-60'>
                     <Link href={`/medarbejdere/${agent.id}`} className='relative'>
                         <Image src={agent.image.url} alt={agent.name} width={800} height={533} className="w-full h-full object-cover" />
-                        <Image src={'/img/social.png'} alt='social media' width={100} height={40} className='absolute bottom-3 left-0' />
+                        <Image src={'/img/social.png'} alt='social media' width={134} height={40} className='absolute bottom-3 left-0' />
                     </Link>
                     <div>
                         <h2 className=' font-semibold py-2'>{agent.name}</h2>
@@ -39,7 +39,7 @@ export default function CardAgent({ agent, variant = false }) {
                         <p className='text-center text-sm text-[#7B7B7B]'>{agent.title}</p>
                     </Link>
                     <div className='flex justify-center items-center gap-4'>
-                        <a href={`mailto:${agent.email}`}><Image src="/img/mail.svg" alt="mail" width={20} height={20} /></a>
+                        <a href={`mailto:${agent.email}`}><Image src="/img/mail.svg" alt="mail" width={21} height={16} /></a>
                         <p className='font-semibold'>in</p>
 
                     </div>

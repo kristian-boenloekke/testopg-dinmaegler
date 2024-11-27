@@ -1,5 +1,8 @@
 'use client'
+import { useAuth } from '@/contexts/AuthProvider'
+import { useToast } from '@/contexts/ToastProvider'
 import { useState } from 'react'
+import { Unsubscribe } from './SubscriptionRCC'
 
 export default function FormContact() {
     const [formData, setFormData] = useState({
@@ -10,7 +13,8 @@ export default function FormContact() {
         newsletter: false,
     })
     const [errors, setErrors] = useState({})
-    const [statusMessage, setStatusMessage] = useState('')
+    const { toast } = useToast()
+    const { user, userIsSubscribing } = useAuth()
 
     function handleChange(e) {
         const { id, value, type, checked } = e.target
@@ -29,7 +33,7 @@ export default function FormContact() {
 
         setErrors(newErrors)
 
-        
+
         return Object.keys(newErrors).length === 0
     }
 
@@ -37,7 +41,7 @@ export default function FormContact() {
         e.preventDefault()
 
         if (!validateForm()) {
-            return 
+            return
         }
 
         try {
@@ -52,7 +56,7 @@ export default function FormContact() {
             const result = await response.json()
 
             if (response.ok) {
-                setStatusMessage('Formularen er sendt!')
+                toast('Tak! Din besked er sendt. Vi kontakter dig snarest muligt', { duration: 8000 })
                 setFormData({
                     name: '',
                     email: '',
@@ -62,15 +66,15 @@ export default function FormContact() {
                 })
 
                 console.log('Form Data:', formData)
-                
+
             } else {
                 // Hvis server-side validerings fejl
-                setStatusMessage('')
+
                 console.error('Server errors:', result.errors)
             }
         } catch (error) {
             console.error('Unexpected error:', error)
-            setStatusMessage('Noget gik galt. Prøv igen.')
+            toast('Noget gik galt. Prøv venligst igen.', { variant: 'destructive' }, { duration: 5000 })
         }
     }
 
@@ -84,9 +88,8 @@ export default function FormContact() {
                         id="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`border p-2 font-normal outline-none ${
-                            errors.name ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`border p-2 font-normal outline-none ${errors.name ? 'border-red-500' : 'border-gray-300'
+                            }`}
                         placeholder="Indtast dit navn"
                     />
                     {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
@@ -98,9 +101,8 @@ export default function FormContact() {
                         id="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`border p-2 font-normal outline-none ${
-                            errors.email ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`border p-2 font-normal outline-none ${errors.email ? 'border-red-500' : 'border-gray-300'
+                            }`}
                         placeholder="Indtast din email"
                     />
                     {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
@@ -114,9 +116,8 @@ export default function FormContact() {
                         id="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        className={`border p-2 font-normal outline-none ${
-                            errors.subject ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`border p-2 font-normal outline-none ${errors.subject ? 'border-red-500' : 'border-gray-300'
+                            }`}
                         placeholder="Indtast emne"
                     />
                     {errors.subject && <p className="text-red-500 text-sm">{errors.subject}</p>}
@@ -128,9 +129,8 @@ export default function FormContact() {
                         id="message"
                         value={formData.message}
                         onChange={handleChange}
-                        className={`border p-2 font-normal outline-none min-h-40 ${
-                            errors.message ? 'border-red-500' : 'border-gray-300'
-                        }`}
+                        className={`border p-2 font-normal outline-none min-h-40 ${errors.message ? 'border-red-500' : 'border-gray-300'
+                            }`}
                         placeholder="Indtast din besked"
                     />
                     {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
@@ -156,8 +156,16 @@ export default function FormContact() {
                     Send Besked
                 </button>
 
-                {statusMessage && <p className="text-sm mt-4">{statusMessage}</p>}
             </div>
+
+            {user && userIsSubscribing ? (
+
+                <div className='text-sm flex flex-wrap gap-1'>
+                    <p >Du er tilmeldt vores nyhedsbrev. Ønsker du at framelde dig nyhedsbrevet?</p>
+                    <Unsubscribe text={"Klik her"} className={"text-red-400"} />
+                </div>
+
+            ) : null}
         </form>
     )
 }

@@ -1,29 +1,87 @@
 'use client'
 import { useAuth } from "@/contexts/AuthProvider"
-import { getCurrentUser } from "@/lib/auth"
 import { Heart } from "lucide-react"
 import { useEffect, useState } from "react"
 
 
-export default function LikeButton({ className, variant = false }) {
+export default function LikeButton({ home, className, variant = false }) {
     const [favorite, setFavorite] = useState(false)
-    const { user } = useAuth()
+    const { user, setUser } = useAuth()
+    const homeId = home.id
 
-
-
-    function handleToggle() {
-        if (!user) {
-            alert('Please log in to like items.')
-            return
+    async function updateHomes(favorite) {
+        // if (!user) {
+        //     alert('Log in for at tilføj som favorit')
+        //     return
+        // }
+    
+        const currentHomes = user.homes || []
+        let updatedHomes = [...currentHomes]
+    
+        if (favorite) {
+            if (!updatedHomes.includes(homeId)) {
+                updatedHomes.push(homeId)
+            }
+        } else {
+            updatedHomes = updatedHomes.filter(id => id !== homeId)
         }
-        setFavorite((prev) => !prev)
+    
+        const data = { homeId }
+    
+        try {
+            const response = await fetch('/api/favorites', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+    
+            if (!response.ok) {
+                console.error('Failed to update user homes', await response.text())
+                return
+            }
+    
+            const updatedUser = await response.json()
+
+            setUser((prevUser) => ({
+                ...prevUser,
+                homes: updatedHomes,
+            }));
+            console.log('User homes updated successfully:', updatedUser)
+        } catch (error) {
+            console.error('Error updating homes:', error)
+        }
     }
+    
+    function handleToggle() {
+        setFavorite((prev) => {
+            const newFavorite = !prev
+            updateHomes(newFavorite)
+            return newFavorite
+        })
+    }
+
+    function removeFavorite() {
+        setFavorite(false)
+        updateHomes(false)
+    }
+
+    useEffect(() => {
+        if (user && user.homes?.includes(homeId)) {
+            setFavorite(true)
+        } else {
+            setFavorite(false)
+        }
+    }, [user, homeId])
+
+    
 
     if (!user) {
         return null
     }
 
-    if (variant) {
+    if (variant === 'gray') {
         return (
             <button
                 onClick={handleToggle}
@@ -33,6 +91,15 @@ export default function LikeButton({ className, variant = false }) {
                 </svg>
             </button>
         )
+    }
+
+    if (variant === 'remove') {
+        return <button 
+            onClick={removeFavorite} 
+            className="bg-primary text-white font-semibold p-2 mt-2 lg:w-40 lg:self-end">
+                Fjern fra favoritter
+            </button>
+        
     }
 
     return (

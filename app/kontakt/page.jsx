@@ -17,8 +17,9 @@ export default function Kontakt() {
 
             <Image src={'/img/favicon.svg'} alt="logo" width={100} height={100} className="mx-auto" />
             
-            <section className="px-global">
+            <section className="px-global flex flex-col gap-4">
                 <h2 className="text-2xl font-semibold text-primary">Vi sidder klar til at besvare dine spørgsmål</h2>
+                <div className="bg-primary h-[3px] w-20"/>
                 <p>
                     Der kan opstå tvivl om mange ting nå man gerne vil, eller er i gang med at sælge sin bolig.
                     <br />Vores medarbejdere sider klar alle ugens dage til at svare på dine spørgsmål.

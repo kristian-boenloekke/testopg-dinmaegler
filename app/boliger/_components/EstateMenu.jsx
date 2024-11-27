@@ -49,7 +49,7 @@ export default function EstateMenu({ home }) {
                     </button>
                 </li>
                 <li>
-                    <LikeButton variant className="h-6 w-6 md:h-8 md:w-8" />
+                    <LikeButton variant='gray' className="h-6 w-6 md:h-8 md:w-8" home={home} />
                 </li>
 
             </ul>
@@ -68,8 +68,6 @@ export default function EstateMenu({ home }) {
     )
 }
 function ImageModal({ home, setShowImageModal, activeModalContent, setActiveModalContent }) {
-
-
     const [sliderRef, instanceRef] = useKeenSlider({
         loop: true,
         slides: {
@@ -170,7 +168,7 @@ function ImageModal({ home, setShowImageModal, activeModalContent, setActiveModa
                             </button>
                         </li>
                         <li>
-                            <LikeButton variant className="h-10 w-10" />
+                            <LikeButton variant='gray' className="h-10 w-10" home={home} />
                         </li>
                     </ul>
                 </div>
