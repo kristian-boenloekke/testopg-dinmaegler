@@ -35,17 +35,17 @@ export default function EstateMenu({ home }) {
             <ul className="flex gap-7 items-center">
                 <li>
                     <button onClick={handleShowGallery}>
-                        <img src="/img/image-gray.svg" alt="imageIcon" className="h-6 w-6 md:h-8 md:w-8" />
+                        <Image src="/img/image-gray.svg" alt="imageIcon" width={44} height={39} className="h-6 w-6 md:h-8 md:w-8" />
                     </button>
                 </li>
                 <li>
                     <button onClick={handleShowFloorplan}>
-                        <img src="/img/plane-gray.svg" alt="floorplan" className="h-6 w-6 md:h-8 md:w-8" />
+                        <Image src="/img/plane-gray.svg" alt="floorplan" width={40} height={40} className="h-6 w-6 md:h-8 md:w-8" />
                     </button>
                 </li>
                 <li>
                     <button onClick={handleShowMap}>
-                        <img src="/img/flag-gray.svg" alt="flag" className="h-6 w-6 md:h-8 md:w-8" />
+                        <Image src="/img/flag-gray.svg" alt="flag" width={28} height={38} className="h-6 w-6 md:h-8 md:w-8" />
                     </button>
                 </li>
                 <li>
@@ -154,17 +154,17 @@ function ImageModal({ home, setShowImageModal, activeModalContent, setActiveModa
                     <ul className="flex gap-7 items-center">
                         <li>
                             <button onClick={handleShowGallery}>
-                                <img src="/img/image-gray.svg" alt="imageIcon" className="h-10 w-10 " />
+                                <Image src="/img/image-gray.svg" alt="imageIcon" width={44} height={39} className="h-10 w-10 " />
                             </button>
                         </li>
                         <li>
                             <button onClick={handleShowFloorplan}>
-                                <img src="/img/plane-gray.svg" alt="floorplan" className="h-10 w-10 " />
+                                <Image src="/img/plane-gray.svg" alt="floorplan" width={40} height={40} className="h-10 w-10 " />
                             </button>
                         </li>
                         <li>
                             <button onClick={handleShowMap}>
-                                <img src="/img/flag-gray.svg" alt="flag" className="h-10 w-10" />
+                                <Image src="/img/flag-gray.svg" alt="flag" width={28} height={38} className="h-10 w-10" />
                             </button>
                         </li>
                         <li>

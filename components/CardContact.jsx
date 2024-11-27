@@ -1,3 +1,4 @@
+import Image from "next/image"
 
 const contactInfo = [
     { "image": "/img/phone.svg", "title": "Ring til os", "contact": "+45 7070 4000" },
@@ -13,7 +14,7 @@ export default function CardContact({ variant = false }) {
                     {contactInfo.map((info, index) => (
                         <li
                             key={index} className="flex flex-col gap-2 items-center justify-center border-b border-gray-300 py-6 last-of-type:border-none last-of-type:pb-0">
-                            <img src={info.image} alt="contact" className="w-8 h-8 p-2 bg-primary rounded-full" />
+                            <Image src={info.image} alt="contact" width={24} height={24} className="w-8 h-8 p-2 bg-primary rounded-full" />
                             <p className="font-semibold">{info.title}</p>
                             <p className="max-w-32 text-center">{info.contact}</p>
                         </li>
@@ -25,7 +26,7 @@ export default function CardContact({ variant = false }) {
                         {contactInfo.map((info, index) => (
                             <li
                                 key={index} className="flex gap-2 items-center py-2">
-                                <img src={info.image} alt="contact" className="w-10 h-10 p-2 bg-primary rounded-full" />
+                                <Image src={info.image} alt="contact" width={24} height={24} className="w-10 h-10 p-2 bg-primary rounded-full" />
                                 <div>
                                     <p className="text-primary3 text-sm">{info.title}</p>
                                     <p className="font-semibold">{info.contact}</p>
