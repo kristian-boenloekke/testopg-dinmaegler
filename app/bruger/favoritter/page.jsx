@@ -1,5 +1,4 @@
 import BannerHeading from "@/components/BannerHeading";
-import { Unsubscribe } from "@/components/SubscriptionRCC";
 import { redirect } from "next/navigation";
 import FavoriteHomes from "./_components/FavoriteHomes";
 import { getCurrentUser } from "@/lib/auth";
@@ -13,14 +12,13 @@ export const metadata = {
 
 
 export default async function Favorites() {
-    // const { user } = await getCurrentUser()
+    const user  = await getCurrentUser()
     const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
 
-    
-
-    // if (!user) {
-    //     redirect('/login')
-    // }
+    if (!user) {
+        redirect('/login')
+        
+    }
     
     return (
         <>

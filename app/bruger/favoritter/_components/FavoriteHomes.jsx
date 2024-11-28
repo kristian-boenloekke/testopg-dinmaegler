@@ -4,7 +4,6 @@ import CardEstate from '@/components/CardEstate'
 import Link from 'next/link';
 export default function FavoriteHomes({homes}) {
     const { usersFavoriteHomes } = useAuth()
-    console.log(usersFavoriteHomes);
     
 
     const favoriteHomes = homes.filter(home => usersFavoriteHomes.includes(home.id))
