@@ -42,7 +42,7 @@ export default function DetailTable({ home }) {
                     </tr>
                     <tr>
                         <td className="py-1">Energimærke</td>
-                        <td className="py-1">A</td>
+                        <td className="py-1">{home.energylabel}</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,5 +1,6 @@
 import BannerHeading from "@/components/BannerHeading"
 import CardAgent from "@/components/CardAgent"
+import Section from "@/components/Section"
 
 
 export const metadata = {
@@ -13,10 +14,9 @@ export default async function Medarbejdere() {
     return (
         <>
             <BannerHeading heading="Medarbejdere i Roskilde" />
+            <Section>
 
-            <section className="flex w-full justify-center items-center p-20">
-
-                <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:w-[70vw]'>
+                <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
                     {agents.map((agent) => (
                         <li key={agent.id} className='w-full'>
                             <CardAgent agent={agent} />
@@ -24,7 +24,7 @@ export default async function Medarbejdere() {
                         </li>
                     ))}
                 </ul>
-            </section>
+            </Section> 
         </>
     )
 }

@@ -39,6 +39,13 @@ export function AuthProvider({ children }) {
     }
 }, []);
 
+useEffect(() => {
+  if (user?.homes) {
+    setUsersFavoriteHomes(user.homes);
+  }
+}, [user]);
+
+
 function updateUserIsSubscribing(value) {
     setUserIsSubscribing(value);
     localStorage.setItem('userIsSubscribing', JSON.stringify(value));
@@ -49,8 +56,7 @@ function updateUserIsSubscribing(value) {
       value={{
         user, setUser,
         usersFavoriteHomes, setUsersFavoriteHomes,
-        userIsSubscribing, setUserIsSubscribing,
-        updateUserIsSubscribing
+        userIsSubscribing, updateUserIsSubscribing
       }}>
       {children}
     </AuthContext.Provider>

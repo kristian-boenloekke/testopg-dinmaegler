@@ -11,11 +11,12 @@ export default async function SearchForm({flexCol = false}) {
                         type="text"
                         id="query"
                         name="query"
-                        className='border border-gray-300 rounded-sm px-2 py-1 w-full text-xs'
+                        className='border border-gray-300 rounded-sm px-2 py-2 w-full text-xs'
                         placeholder='Søg på fx glaskeramisk komfur, bryggers, kælder eller lignende'
                         required
                     />
-                    <button type="submit" className='bg-primary text-white p-2 px-8 text-xs rounded-sm'>Søg</button>
+                    <button type="submit" className='bg-primary text-white p-2 font-semibold px-8 text-sm rounded-sm'>Søg</button>
+                   
                 </div>
         </form>
     )

@@ -56,7 +56,7 @@ export default function FormContact() {
             const result = await response.json()
 
             if (response.ok) {
-                toast('Tak! Din besked er sendt. Vi kontakter dig snarest muligt', { duration: 8000 })
+                toast('Tak! Din besked er sendt. Vi kontakter dig snarest muligt', { duration: 4000 })
                 setFormData({
                     name: '',
                     email: '',
@@ -79,7 +79,8 @@ export default function FormContact() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="border border-gray-300 p-6 w-full">
+        <div className='border border-gray-300 p-6'>
+        <form onSubmit={handleSubmit} className=" w-full">
             <div className="flex flex-col lg:flex-row gap-4 pb-4">
                 <label htmlFor="name" className="flex flex-col gap-2 font-semibold w-full">
                     Navn
@@ -138,26 +139,30 @@ export default function FormContact() {
             </div>
 
             <div className="flex flex-col gap-4 py-2">
-                <label htmlFor="newsletter" className="text-sm text-primary3 flex items-center">
-                    <input
-                        type="checkbox"
-                        id="newsletter"
-                        checked={formData.newsletter}
-                        onChange={handleChange}
-                        className="mr-2"
-                    />
-                    Ja tak, jeg vil gerne modtage Din Mæglers nyhedsbrev
-                </label>
+                {user && userIsSubscribing ? null : (
+
+                    <label htmlFor="newsletter" className="text-sm text-primary3 flex items-center">
+                        <input
+                            type="checkbox"
+                            id="newsletter"
+                            checked={formData.newsletter}
+                            onChange={handleChange}
+                            className="mr-2"
+                        />
+                        Ja tak, jeg vil gerne modtage Din Mæglers nyhedsbrev
+                    </label>
+                )}
 
                 <button
                     type="submit"
-                    className="bg-primary text-white py-2 px-4 hover:bg-primary3 self-start"
+                    className="bg-primary text-white py-2 px-4 mt-2 hover:bg-primary3 self-start"
                 >
                     Send Besked
                 </button>
 
             </div>
 
+        </form>
             {user && userIsSubscribing ? (
 
                 <div className='text-sm flex flex-wrap gap-1'>
@@ -166,6 +171,6 @@ export default function FormContact() {
                 </div>
 
             ) : null}
-        </form>
+        </div>
     )
 }

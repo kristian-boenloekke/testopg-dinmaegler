@@ -35,7 +35,7 @@ export function Subscribe() {
             throw new Error(errorMessage)
           }
       
-          toast(`Tak! Du er nu tilmeldt nyhedsbrevet med email ${email}`, { duration: 5000 })
+          toast(`Tak! Du er nu tilmeldt nyhedsbrevet med email ${email}`, { duration: 2000 })
           updateUserIsSubscribing(true)
          
           
@@ -43,7 +43,7 @@ export function Subscribe() {
           console.error("Error during subscription:", err)
           toast(`Der er desværre sket en fejl. Prøv venligst igen.`, {
             variant: "destructive",
-            duration: 5000,
+            duration: 3000,
           })
         }
       }
@@ -55,7 +55,7 @@ export function Subscribe() {
           type="email"
           name="email"
           placeholder="Indtast din email addresse"
-          className="bg-white py-2 text-xs w-full outline-none"
+          className="bg-white py-2 text-sm w-full outline-none"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           required
@@ -71,6 +71,7 @@ export function Subscribe() {
 
 export function Unsubscribe({text, className}) {
     const { toast } = useToast()
+    const { updateUserIsSubscribing } = useAuth()
 
   async function handleDelete() {
     try {
@@ -82,11 +83,10 @@ export function Unsubscribe({text, className}) {
         throw new Error("Failed to delete subscriber")
       }
 
-      toast("Du er nu frameldt nyhedsbrevet", { duration: 5000 })
-    } catch (err) {
-   
-      toast(err.message, {variant: "destructive", duration: 5000 })
+      toast("Du er nu frameldt nyhedsbrevet", { duration: 2000 })
       updateUserIsSubscribing(false)
+    } catch (err) {
+      toast(err.message, {variant: "destructive", duration: 3000 })
     } 
   }
 

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 
 export default function LikeButton({ home, className, variant = false }) {
     const [favorite, setFavorite] = useState(false)
-    const { user, setUser } = useAuth()
+    const { user, setUser, setUsersFavoriteHomes } = useAuth()
     const homeId = home.id
 
     async function updateHomes(favorite) {
@@ -48,6 +48,8 @@ export default function LikeButton({ home, className, variant = false }) {
                 ...prevUser,
                 homes: updatedHomes,
             }));
+
+            setUsersFavoriteHomes(updatedHomes)
             console.log('User homes updated successfully:', updatedUser)
         } catch (error) {
             console.error('Error updating homes:', error)

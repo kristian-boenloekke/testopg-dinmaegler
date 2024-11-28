@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { logout } from "@/lib/auth"
 import LogoutButton from "./LogoutButton"
 
 export default function BurgerMenu({user}) {
@@ -14,21 +13,16 @@ export default function BurgerMenu({user}) {
         setShowMenu(prev => !prev)
     }
 
-    function handleLogOut() {
-        logout()
-        setShowMenu(false)
-    }
-
     return (
         <>
-            <button onClick={ToggleMenu} className="block md:hidden text-primary">
+            <button onClick={ToggleMenu} className="block md:hidden text-primary" aria-label="Open navigation-menu">
                 <Menu size={35} />
             </button>
 
             {showMenu &&
-                <div className="fixed inset-0 bg-primary/95 h-screen z-20 flex flex-col justify-between">
+                <div className="fixed inset-0 bg-primary/95 h-screen z-20 flex flex-col justify-between pb-28">
                     <div className="w-full flex flex-col">
-                        <button onClick={ToggleMenu} className="p-4 sm:p-8 text-white self-end">
+                        <button onClick={ToggleMenu} className="p-4 sm:p-8 text-white self-end" aria-label="Close menu">
                             <X size={35} />
                         </button>
 
@@ -36,7 +30,7 @@ export default function BurgerMenu({user}) {
                         <nav className="flex flex-col gap-4 text-white text-[6vw] p-4 px-10">
                             <Link href={'/boliger'} onClick={() => setShowMenu(false)}>Boliger til salg</Link>
                             <Link href={'/medarbejdere'} onClick={() => setShowMenu(false)}>Mæglere</Link>
-                            {user && <Link href={'/'} onClick={() => setShowMenu(false)}>Mine favoritter</Link>}
+                            {user && <Link href={'/bruger/favoritter'} onClick={() => setShowMenu(false)}>Mine favoritter</Link>}
                             <Link href={'/kontakt'} onClick={() => setShowMenu(false)}>Kontakt os</Link>
 
                             { user ? <LogoutButton className="py-4 border-t mt-4">Log ud</LogoutButton>

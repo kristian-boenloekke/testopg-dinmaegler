@@ -1,8 +1,8 @@
 import BannerHeading from "@/components/BannerHeading";
-import CardEstate from "@/components/CardEstate";
 import { Unsubscribe } from "@/components/SubscriptionRCC";
-import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import FavoriteHomes from "./_components/FavoriteHomes";
+import { getCurrentUser } from "@/lib/auth";
 
 export const metadata = {
     title: 'Mine favoritter',
@@ -13,28 +13,20 @@ export const metadata = {
 
 
 export default async function Favorites() {
-    const user = await getCurrentUser()
-    const usersFavoriteHomes = user?.homes || []
+    // const { user } = await getCurrentUser()
     const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
-    const favoriteHomes = homes.filter(home => usersFavoriteHomes.includes(home.id))
+
     
 
-    if (!user) {
-        redirect('/login')
-    }
+    // if (!user) {
+    //     redirect('/login')
+    // }
     
     return (
         <>
             <BannerHeading heading="Mine favoritter" />
-            <Unsubscribe />
 
-            <ul className="flex flex-col gap-6 global-padding">
-                {favoriteHomes.map((home) => (
-                    <li key={home.id}>
-                        <CardEstate home={home} variant="favorite" />
-                    </li>
-                ))}
-            </ul>
+            <FavoriteHomes homes={homes} />
         </>
     )
 }
