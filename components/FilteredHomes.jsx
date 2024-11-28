@@ -1,5 +1,3 @@
-
-
 'use client'
 import { useState } from 'react'
 import SearchFilter from './SearchFilter'

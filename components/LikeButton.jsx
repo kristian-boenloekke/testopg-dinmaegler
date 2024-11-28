@@ -10,10 +10,6 @@ export default function LikeButton({ home, className, variant = false }) {
     const homeId = home.id
 
     async function updateHomes(favorite) {
-        // if (!user) {
-        //     alert('Log in for at tilføj som favorit')
-        //     return
-        // }
     
         const currentHomes = user.homes || []
         let updatedHomes = [...currentHomes]
@@ -41,8 +37,6 @@ export default function LikeButton({ home, className, variant = false }) {
                 console.error('Failed to update user homes', await response.text())
                 return
             }
-    
-            const updatedUser = await response.json()
 
             setUser((prevUser) => ({
                 ...prevUser,
@@ -50,7 +44,7 @@ export default function LikeButton({ home, className, variant = false }) {
             }));
 
             setUsersFavoriteHomes(updatedHomes)
-            console.log('User homes updated successfully:', updatedUser)
+          
         } catch (error) {
             console.error('Error updating homes:', error)
         }

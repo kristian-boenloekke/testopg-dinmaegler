@@ -1,4 +1,3 @@
-import { getCurrentUser } from '@/lib/auth';
 import Image from 'next/image';
 import CardEstate from '@/components/CardEstate';
 import CardAgent from '@/components/CardAgent';
@@ -8,48 +7,35 @@ import SearchForm from '@/components/FormSearch';
 import { Subscribe } from '@/components/SubscriptionRCC';
 
 
-export const revalidate = 3600; // Revalidate every hour since data changes infrequently
+export const revalidate = 3600
 
 async function fetchHomes() {
   const response = await fetch('https://dinmaegler.onrender.com/homes', {
     next: { revalidate: 3600 }
-  });
-  if (!response.ok) throw new Error('Failed to fetch homes');
-  return response.json();
+  })
+  if (!response.ok) throw new Error('Failed to fetch homes')
+  return response.json()
 }
 
 async function fetchAgents() {
   const response = await fetch('https://dinmaegler.onrender.com/agents', {
     next: { revalidate: 3600 }
   });
-  if (!response.ok) throw new Error('Failed to fetch agents');
-  return response.json();
+  if (!response.ok) throw new Error('Failed to fetch agents')
+  return response.json()
 }
 
 function getRandomItems(arr, num) {
-  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  const shuffled = [...arr].sort(() => 0.5 - Math.random())
   return shuffled.slice(0, num);
 }
 
 
-
-
 export default async function Page() {
-  // const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
-  // const agents = await fetch('https://dinmaegler.onrender.com/agents').then(r => r.json())
-
   const [homes, agents] = await Promise.all([
     fetchHomes(),
     fetchAgents()
   ])
-  // function getRandomItems(arr, num) {
-  //   const shuffled = [...arr].sort(() => 0.5 - Math.random())
-  //   return shuffled.slice(0, num)
-  // }
-
-  const user = await getCurrentUser()
-  console.log(user);
-  
 
   const randomHomes = getRandomItems(homes, 4)
   const randomAgents = getRandomItems(agents, 3)

@@ -3,7 +3,6 @@ import { getCurrentUser } from "@/lib/auth"
 export async function POST(request) {
     try {
         const body = await request.json()
-        console.log("Incoming request body:", body)
         const { email } = body
         
 

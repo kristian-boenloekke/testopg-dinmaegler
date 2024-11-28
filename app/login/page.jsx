@@ -31,10 +31,6 @@ export default function Login() {
         
       }
 
-      const data = await res.json()
-
-      console.log('Login successful:', data)
-
       setUser(true)
       router.push('/')
     } catch (err) {

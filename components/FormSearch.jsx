@@ -1,7 +1,5 @@
 export default async function SearchForm({flexCol = false}) {
 
-
-
     return (
 
         <form method="GET" action="/search">  

@@ -1,6 +1,5 @@
 'use client'
-import React, { useCallback } from 'react'
-import { useRouter } from 'next/navigation';
+import { useCallback } from 'react'
 
 
 export default function SearchFilter({filters, setFilters}) {
@@ -124,57 +123,3 @@ function CustomRangeSlider({ minPrice, maxPrice, onChange }) {
         </div>
     );
 }
-
-
-
-// export default function SearchFilter({ filters }) {
-//     const router = useRouter();
-
-//     function handleTypeChange(e) {
-//         const type = e.target.value;
-//         const params = new URLSearchParams(window.location.search);
-//         if (type) {
-//             params.set('type', type);
-//         } else {
-//             params.delete('type');
-//         }
-//         router.push(`?${params.toString()}`);
-//     }
-
-//     function handlePriceChange(min, max) {
-//         const params = new URLSearchParams(window.location.search);
-//         params.set('minPrice', min);
-//         params.set('maxPrice', max);
-//         router.push(`?${params.toString()}`);
-//     }
-
-//     return (
-//         <div className='flex flex-col gap-5 md:flex-row md:gap-10 global-padding'>
-//             <div className='flex flex-col gap-2'>
-//                 <label htmlFor="estateType" className='text-sm'>Ejendomstype</label>
-//                 <select
-//                     name="estateType"
-//                     id="estateType"
-//                     className='border p-2 w-full md:w-52 text-sm outline-none'
-//                     value={filters.type}
-//                     onChange={handleTypeChange}
-//                 >
-//                     <option value="">Alle</option>
-//                     <option value="Ejerlejlighed">Ejerlejlighed</option>
-//                     <option value="Villa">Villa</option>
-//                     <option value="Byhus">Byhus</option>
-//                     <option value="Landejendom">Landejendom</option>
-//                 </select>
-//             </div>
-
-//             <div className='flex flex-col gap-3 w-full'>
-//                 <label htmlFor="priceRange" className='text-sm'>Pris-interval</label>
-//                 <CustomRangeSlider
-//                     minPrice={filters.minPrice}
-//                     maxPrice={filters.maxPrice}
-//                     onChange={handlePriceChange}
-//                 />
-//             </div>
-//         </div>
-//     );
-// }

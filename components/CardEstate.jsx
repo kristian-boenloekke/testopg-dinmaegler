@@ -64,7 +64,6 @@ export default function CardEstate({ home, variant = false }) {
                             width={1400} height={934}
                             className="w-full h-40 object-cover filter brightness-90 hover:brightness-100 transition duration-300 ease-in-out"
                         />
-                        {/* <LikeButton className={"absolute top-2 right-2"} /> */}
                     </div>
                     <div className="flex flex-col p-2 gap-1 border-b border-r">
                         <h2 className="font-semibold">{home.adress1}</h2>
