@@ -49,7 +49,7 @@ export default function Header() {
                 <nav className="hidden md:flex gap-3">
                     <Link href={'/boliger'}>Boliger til salg</Link>
                     <Link href={'/medarbejdere'}>Mæglere</Link>
-                    {user && <Link href={'/bruger/favoritter'}>Mine favoritter</Link>}
+                    {user && <Link href={'/konto/favoritter'}>Mine favoritter</Link>}
                     <Link href={'/kontakt'}>Kontakt os</Link>
                 </nav>
 

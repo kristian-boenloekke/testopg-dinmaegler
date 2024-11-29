@@ -14,7 +14,7 @@ export default function FormContact() {
     })
     const [errors, setErrors] = useState({})
     const { toast } = useToast()
-    const { user, userIsSubscribing } = useAuth()
+    const { user, emailIsSubscribing } = useAuth()
 
     function handleChange(e) {
         const { id, value, type, checked } = e.target
@@ -69,7 +69,6 @@ export default function FormContact() {
 
             } else {
                 // Hvis server-side validerings fejl
-
                 console.error('Server errors:', result.errors)
             }
         } catch (error) {
@@ -78,8 +77,11 @@ export default function FormContact() {
         }
     }
 
+    const userSubscription = emailIsSubscribing.find((entry) => entry.email === user?.email)
+
     return (
         <div className='border border-gray-300 p-6'>
+            <Unsubscribe text={'frameld'} />
         <form onSubmit={handleSubmit} className=" w-full">
             <div className="flex flex-col lg:flex-row gap-4 pb-4">
                 <label htmlFor="name" className="flex flex-col gap-2 font-semibold w-full">
@@ -139,7 +141,7 @@ export default function FormContact() {
             </div>
 
             <div className="flex flex-col gap-4 py-2">
-                {user && userIsSubscribing ? null : (
+                {user && userSubscription?.isSubscribing ? null : (
 
                     <label htmlFor="newsletter" className="text-sm text-primary3 flex items-center">
                         <input
@@ -163,9 +165,9 @@ export default function FormContact() {
             </div>
 
         </form>
-            {user && userIsSubscribing ? (
+            {user && userSubscription?.isSubscribing ? (
 
-                <div className='text-sm flex flex-wrap gap-1'>
+                <div className='text-sm flex flex-wrap gap-1 pt-4'>
                     <p >Du er tilmeldt vores nyhedsbrev. Ønsker du at framelde dig nyhedsbrevet?</p>
                     <Unsubscribe text={"Klik her"} className={"text-red-400"} />
                 </div>

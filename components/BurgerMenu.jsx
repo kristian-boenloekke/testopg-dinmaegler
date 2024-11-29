@@ -30,7 +30,7 @@ export default function BurgerMenu({user}) {
                         <nav className="flex flex-col gap-4 text-white text-[6vw] p-4 px-10">
                             <Link href={'/boliger'} onClick={() => setShowMenu(false)}>Boliger til salg</Link>
                             <Link href={'/medarbejdere'} onClick={() => setShowMenu(false)}>Mæglere</Link>
-                            {user && <Link href={'/bruger/favoritter'} onClick={() => setShowMenu(false)}>Mine favoritter</Link>}
+                            {user && <Link href={'/konto/favoritter'} onClick={() => setShowMenu(false)}>Mine favoritter</Link>}
                             <Link href={'/kontakt'} onClick={() => setShowMenu(false)}>Kontakt os</Link>
 
                             { user ? <LogoutButton className="py-4 border-t mt-4">Log ud</LogoutButton>

@@ -3,10 +3,11 @@ import { cookies } from 'next/headers'
 
 export async function GET() {
   const user = await getCurrentUser()
+  
 
   if (user) {
     return new Response(
-      JSON.stringify({ authenticated: true, userId: user.id, homes: user.homes }),
+      JSON.stringify({ authenticated: true, homes: user.homes, email: user.email }),
       {
         status: 200,
         headers: { 'Content-Type': 'application/json' },
