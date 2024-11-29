@@ -95,7 +95,7 @@ export function Subscribe() {
 
 export function Unsubscribe({ text, className }) {
   const { toast } = useToast()
-  const { updateEmailIsSubscribing } = useAuth()
+  const { updateEmailIsSubscribing, user } = useAuth()
 
   async function handleDelete() {
     try {
@@ -108,7 +108,7 @@ export function Unsubscribe({ text, className }) {
       }
 
       toast("Du er nu frameldt vores nyhedsbrev", { duration: 2000 })
-      updateEmailIsSubscribing(false, { email: "" })
+      updateEmailIsSubscribing(false, user.email)
     } catch (err) {
       toast(err.message, { variant: "destructive", duration: 3000 })
     }

@@ -7,10 +7,14 @@ const AuthContext = createContext()
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [usersFavoriteHomes, setUsersFavoriteHomes] = useState([])
-  const [emailIsSubscribing, setEmailIsSubscribing] = useState(() => {
-    const savedSubscriptions = localStorage.getItem('emailIsSubscribing');
-    return savedSubscriptions ? decryptData(savedSubscriptions) : [];
-  })
+  const [emailIsSubscribing, setEmailIsSubscribing] = useState([])  
+
+  useEffect(() => {
+    const savedSubscriptions = localStorage.getItem('emailIsSubscribing')
+    if (savedSubscriptions) {
+      setEmailIsSubscribing(decryptData(savedSubscriptions))
+    }
+  }, [])  
 
   useEffect(() => {
     async function fetchUser() {
@@ -35,7 +39,6 @@ export function AuthProvider({ children }) {
     fetchUser()
   }, [])
 
-
   useEffect(() => {
     if (user?.homes) {
       setUsersFavoriteHomes(user.homes)
@@ -44,20 +47,20 @@ export function AuthProvider({ children }) {
 
   function updateEmailIsSubscribing(isSubscribing, email) {
     setEmailIsSubscribing((prev) => {
-      const existingIndex = prev.findIndex((entry) => entry.email === email);
+      const existingIndex = prev.findIndex((entry) => entry.email === email)
       let updatedSubscriptions;
-
+  
       if (existingIndex !== -1) {
         updatedSubscriptions = [...prev];
-        updatedSubscriptions[existingIndex].isSubscribing = isSubscribing;
+        updatedSubscriptions[existingIndex].isSubscribing = isSubscribing
       } else {
-        updatedSubscriptions = [...prev, { email, isSubscribing }];
+        updatedSubscriptions = [...prev, { email, isSubscribing }]
       }
-
+  
       const encryptedData = encryptData(updatedSubscriptions)
       localStorage.setItem('emailIsSubscribing', encryptedData)
-
-      return updatedSubscriptions;
+  
+      return updatedSubscriptions
     })
   }
 
