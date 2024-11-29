@@ -6,9 +6,11 @@ import { useKeenSlider } from 'keen-slider/react';
 import Image from "next/image";
 import LikeButton from "@/components/LikeButton";
 import GoogleMapComponent from "@/components/GoogleMap";
+import { useAuth } from "@/contexts/AuthProvider";
 
 
 export default function EstateMenu({ home }) {
+    const { user } = useAuth()
     const [showImageModal, setShowImageModal] = useState(false)
     const [activeModalContent, setActiveModalContent] = useState(null)
 
@@ -35,22 +37,23 @@ export default function EstateMenu({ home }) {
             <ul className="flex gap-7 items-center">
                 <li>
                     <button onClick={handleShowGallery}>
-                        <Image src="/img/image-gray.svg" alt="imageIcon" width={44} height={39} className="h-8 w-8 md:h-8 md:w-8" />
+                        <Image src="/img/image-gray.svg" alt="imageIcon" width={44} height={39} className="h-7 w-7 md:h-8 md:w-8" />
                     </button>
                 </li>
                 <li>
                     <button onClick={handleShowFloorplan}>
-                        <Image src="/img/plane-gray.svg" alt="floorplan" width={40} height={40} className="h-8 w-8 md:h-8 md:w-8" />
+                        <Image src="/img/plane-gray.svg" alt="floorplan" width={40} height={40} className="h-7 w-7 md:h-8 md:w-8" />
                     </button>
                 </li>
                 <li>
                     <button onClick={handleShowMap}>
-                        <Image src="/img/flag-gray.svg" alt="flag" width={28} height={38} className="h-8 w-8 md:h-8 md:w-8" />
+                        <Image src="/img/flag-gray.svg" alt="flag" width={28} height={38} className="h-7 w-7 md:h-8 md:w-8" />
                     </button>
                 </li>
-                <li>
-                    <LikeButton variant='gray' className="h-8 w-8 md:h-8 md:w-8" home={home} />
-                </li>
+                {user &&
+                    <li>
+                        <LikeButton variant='gray' className="h-7 w-7 md:h-8 md:w-8" home={home} />
+                    </li>}
 
             </ul>
             {showImageModal &&
@@ -68,6 +71,7 @@ export default function EstateMenu({ home }) {
     )
 }
 function ImageModal({ home, setShowImageModal, activeModalContent, setActiveModalContent }) {
+    const user = useAuth()
     const [sliderRef, instanceRef] = useKeenSlider({
         loop: true,
         slides: {
@@ -93,7 +97,7 @@ function ImageModal({ home, setShowImageModal, activeModalContent, setActiveModa
     return (
         <>
 
-            <div className="fixed inset-0 z-50 flex flex-col justify-between bg-black/90">
+            <div className="fixed inset-0 z-50 flex flex-col h-[100dvh] justify-between bg-black/90">
                 <button
                     onClick={() => setShowImageModal(false)}
                     className="self-end p-4 sm:p-8 text-white"
@@ -167,9 +171,11 @@ function ImageModal({ home, setShowImageModal, activeModalContent, setActiveModa
                                 <Image src="/img/flag-gray.svg" alt="flag" width={28} height={38} className="h-10 w-10" />
                             </button>
                         </li>
-                        <li>
-                            <LikeButton variant='gray' className="h-10 w-10" home={home} />
-                        </li>
+                        {user ?
+                            <li>
+                                <LikeButton variant='gray' className="h-10 w-10" home={home} />
+                            </li>
+                        : null }
                     </ul>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 'use client';
 import { GoogleMap, LoadScriptNext, Marker } from '@react-google-maps/api';
 
-export default function GoogleMapComponent({lat, lng, height = '50vh'}) {
+export default function GoogleMapComponent({lat, lng, height = '60vh'}) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
   const containerStyle = {
     width: '100%',

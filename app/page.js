@@ -168,9 +168,9 @@ export default async function Page() {
         <Image
           src={'/img/phones-3.png'}
           alt='phone'
-          width={200}
-          height={200}
-          className='w-80 hidden md:block z-10 pt-10'
+          width={441}
+          height={394}
+          className='w-80 h-auto hidden md:block z-10 pt-10'
         />
         <div className='bg-[url("/img/phones-3.png")] bg-cover bg-center w-60 h-60 filter brightness-[25%] absolute bottom-0 right-4 md:hidden z-0'></div>
       </section>

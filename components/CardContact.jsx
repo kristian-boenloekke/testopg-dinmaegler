@@ -12,8 +12,8 @@ export default function CardContact({ variant = false }) {
             {variant ?
                 <ul className="flex flex-col gap-4 p-4 border border-gray-300 w-full h-full">
                     {contactInfo.map((info, index) => (
-                        <li key={index} >
-                            <a href={info.href} className="flex flex-col gap-2 items-center justify-center border-b border-gray-300 py-6 last-of-type:border-none last-of-type:pb-0">
+                        <li key={index} className="border-b border-gray-300 py-6 last-of-type:border-none last-of-type:pb-0" >
+                            <a href={info.href} className="flex flex-col gap-2 items-center justify-center ">
                                 <Image src={info.image} alt="contact" width={24} height={24} className="w-8 h-8 p-2 bg-primary rounded-full" />
                                 <p className="font-semibold">{info.title}</p>
                                 <p className="max-w-32 text-center">{info.contact}</p>
