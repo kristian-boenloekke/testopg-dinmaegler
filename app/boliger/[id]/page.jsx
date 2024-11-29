@@ -7,7 +7,9 @@ import Description from '../_components/Description';
 
 
 export async function generateStaticParams() {
-    const homes = await fetch('https://dinmaegler.onrender.com/homes')
+    const homes = await fetch('https://dinmaegler.onrender.com/homes', { 
+        cache: 'force-cache',
+      })
       .then(r => r.json())
     
     return homes.map((home) => ({
@@ -17,7 +19,7 @@ export async function generateStaticParams() {
 export default async function Home({ params }) {
     const awaitedParams = await params
     const id = awaitedParams.id
-    const home = await fetch(`https://dinmaegler.onrender.com/homes/${id}`).then(r => r.json())
+    const home = await fetch(`https://dinmaegler.onrender.com/homes/${id}`, { cache: 'force-cache' }).then(r => r.json())
     const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
     
     

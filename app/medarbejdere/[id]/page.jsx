@@ -5,7 +5,8 @@ import SearchForm from "@/components/FormSearch";
 import Section from "@/components/Section";
 
 export async function generateStaticParams() {
-        const agents = await fetch('https://dinmaegler.onrender.com/agents')
+        const agents = await fetch('https://dinmaegler.onrender.com/agents', { 
+            cache: 'force-cache' })
             .then(r => r.json())
             .then((data) => data)
         
@@ -17,7 +18,8 @@ export async function generateStaticParams() {
 export default async function Medarbejder({ params }) {
     const awaitedParams = await params
     const id = awaitedParams.id
-    const agent = await fetch(`https://dinmaegler.onrender.com/agents/${id}`).then(r => r.json())
+    const agent = await fetch(`https://dinmaegler.onrender.com/agents/${id}`, { 
+        cache: 'force-cache' }).then(r => r.json())
 
     return (
         <>
