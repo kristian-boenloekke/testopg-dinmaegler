@@ -1,8 +1,8 @@
 'use client'
 import { useState } from 'react'
 import SearchFilter from './SearchFilter'
-import CardEstate from './CardEstate'
-import Section from './Section'
+import CardEstate from '@/components/CardEstate'
+import Section from '@/components/Section'
 
 export default function FilteredHomes({ initialHomes }) {
     const [filters, setFilters] = useState({

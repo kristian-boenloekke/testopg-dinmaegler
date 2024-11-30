@@ -11,11 +11,7 @@ export const metadata = {
     }
 }
 
-const contactInfo = [
-    { "image": "/img/phone.svg", "title": "Ring til os", "contact": "+45 7070 4000" },
-    { "image": "/img/paper-plane.svg", "title": "Send en mail", "contact": "4000@dinmaegler.com" },
-    { "image": "/img/maps-and-flags-1.svg", "title": "Besøg butikken", "contact": "Stændertorvet 78, 4000 Roskilde" },
-]
+export const dynamic = 'force-static'
 
 export default function Kontakt() {
     return (
@@ -45,3 +41,4 @@ export default function Kontakt() {
         </>
     )
 }
+

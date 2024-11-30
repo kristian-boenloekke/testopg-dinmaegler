@@ -9,6 +9,10 @@ export const metadata = {
         canonical: 'https://dinmaegler.vercel.app/medarbejdere',
     }
 }
+
+export const dynamic = 'force-static'
+
+
 export default async function Medarbejdere() {
     const agents = await fetch('https://dinmaegler.onrender.com/agents').then(r => r.json())
     return (

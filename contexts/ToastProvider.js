@@ -43,10 +43,9 @@ export function ToastProvider({ children }) {
                         key={toast.id}
                         style={{
                             backgroundColor: toast.variant === 'destructive' ? '#ff4d4f' : '#162A41',
-                            // color: toast.variant === 'destructive' ? 'white' : 'black',
+                            
                         }}
                         className={`p-4 rounded-md shadow-lg flex justify-between items-center mb-2 border border-black text-white`}
-                        // ${toast.variant === 'destructive' ? 'bg-red-600 text-white' : 'bg-red-600 text-black'}
                     >
                         {toast.message}
                         <button

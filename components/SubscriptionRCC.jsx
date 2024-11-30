@@ -11,8 +11,8 @@ export function Subscribe() {
   const { toast } = useToast()
   const { updateEmailIsSubscribing, emailIsSubscribing, user } = useAuth()
 
-
-  async function handleSubscribe(e) {
+ 
+  async function handleSubscribe(e) {  // DB subscription request
     e.preventDefault()
 
     try {
@@ -37,9 +37,8 @@ export function Subscribe() {
       }
 
       toast(`Tak! Du er nu tilmeldt nyhedsbrevet med email ${email}`, { duration: 2000 })
-      updateEmailIsSubscribing(true, email)
-
-
+      
+      updateEmailIsSubscribing(email, true)  // setEmailIsSubscribing helper function (localstorage)
 
 
     } catch (err) {
@@ -108,7 +107,7 @@ export function Unsubscribe({ text, className }) {
       }
 
       toast("Du er nu frameldt vores nyhedsbrev", { duration: 2000 })
-      updateEmailIsSubscribing(false, user.email)
+      updateEmailIsSubscribing(user.email, false)
     } catch (err) {
       toast(err.message, { variant: "destructive", duration: 3000 })
     }

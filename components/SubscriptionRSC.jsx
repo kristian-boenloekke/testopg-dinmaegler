@@ -4,7 +4,7 @@ export function SubscribeRSC() {
   async function handleSubscribe(formData) {
     'use server'
 
-    const email = formData.get('email') // Extract email from form data
+    const email = formData.get('email') 
 
     try {
       const response = await fetch('https://dinmaegler.onrender.com/subscribers', {
@@ -26,7 +26,7 @@ export function SubscribeRSC() {
     }
   }
 
-  let message = null // Holds the result message if a submission occurs
+  let message = null
 
   return (
     <div className="w-full">

@@ -3,6 +3,16 @@ import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
 import { MySubscription } from "./_components/MySubscription";
 import { redirect } from "next/navigation";
+
+export const metadata = {
+    title: 'Konto',
+    alternates: {
+        canonical: 'https://dinmaegler.vercel.app/konto',
+    }
+}
+
+export const dynamic = 'force-static'
+
 export default async function Account() {
     const user = await getCurrentUser()
 
