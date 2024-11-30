@@ -6,7 +6,6 @@ import Section from '@/components/Section';
 import SearchForm from '@/components/FormSearch';
 import { Subscribe } from '@/components/SubscriptionRCC';
 
-
 export const dynamic = 'force-static'
 export const revalidate = 3600
 
