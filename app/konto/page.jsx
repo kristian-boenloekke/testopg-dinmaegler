@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
 import { MySubscription } from "./_components/MySubscription";
 import { redirect } from "next/navigation";
+import { Unsubscribe } from "@/components/SubscriptionRCC";
 
 export const metadata = {
     title: 'Konto',
@@ -10,8 +11,6 @@ export const metadata = {
         canonical: 'https://dinmaegler.vercel.app/konto',
     }
 }
-
-export const dynamic = 'force-static'
 
 export default async function Account() {
     const user = await getCurrentUser()
@@ -23,6 +22,7 @@ export default async function Account() {
     return (
         <>
            <BannerHeading heading="Min Konto" />
+           <Unsubscribe text={"Klik her for at framelde vores nyhedsbrev"} className="text-red-500" />
             <div className="global-padding flex flex-col justify-between min-h-[50vh]">
                 <div className="flex flex-col gap-10">
                 <p className="text-center text-3xl">Velkommen {user.username}</p>

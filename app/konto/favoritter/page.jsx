@@ -10,9 +10,9 @@ export const metadata = {
     }
 }
 
-export const dynamic = 'force-static'
+// export const dynamic = 'force-static'
 
-export const revalidate = 3000
+// export const revalidate = 3000
 
 
 export default async function Favorites() {
