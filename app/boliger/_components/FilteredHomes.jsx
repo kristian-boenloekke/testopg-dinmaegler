@@ -12,8 +12,8 @@ export default function FilteredHomes({ initialHomes }) {
     })
 
     const filteredHomes = initialHomes.filter(home => {
-        const matchesType = !filters.type || home.type === filters.type
-        const matchesPrice = home.price >= filters.minPrice && home.price <= filters.maxPrice;
+        const matchesType = filters.type === "" || home.type === filters.type
+        const matchesPrice = home.price >= filters.minPrice && home.price <= filters.maxPrice
         return matchesType && matchesPrice
     })
 

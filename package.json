@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-slider": "^1.2.1",
     "@react-google-maps/api": "^2.20.3",
     "crypto-js": "^4.2.0",
     "keen-slider": "^6.8.6",

@@ -1,5 +1,6 @@
 import BannerHeading from '@/components/BannerHeading'
 import FilteredHomes from './_components/FilteredHomes'
+import RadixSlider from './_components/RadixSlider'
 
 export const metadata = {
     title: 'Boliger',
@@ -18,6 +19,7 @@ export default async function HomesPage() {
     return (
         <>
             <BannerHeading heading="Boliger til salg" />
+            
 
             <FilteredHomes initialHomes={homes} />
         </>
