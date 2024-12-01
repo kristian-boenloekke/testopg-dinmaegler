@@ -67,7 +67,7 @@ export const metadata = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
+  "@type": "Organization",
   name: "Din Mægler",
   url: "https://dinmaegler.vercel.app",
   telephone: "+45 70 00 00 00",

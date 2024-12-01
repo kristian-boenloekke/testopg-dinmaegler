@@ -9,8 +9,6 @@ export const metadata = {
     }
 }
 
-export const dynamic = 'force-static'
-
 export default async function SearchResults({ searchParams }) {
     const awaitedParams = await searchParams
     const query = awaitedParams.query?.toLowerCase() || ''
