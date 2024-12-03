@@ -51,7 +51,6 @@ export function AuthProvider({ children }) {
 
 
 // state setter helper funktion, som bliver kaldt i @/components/SubscriptionRCC -> Subscribe() og Unsubscribe()
-//   - emails krypteres før de gemmes i localstorage 
 //   - man kan tilmelde sig nyhedsbrev uden at have en konto eller være logget ind -> Subscribe() -> updateEmailIsSubscribing(email, true)
 //   - man skal have en konto og være logget ind for at framelde sig nyhedsbrev -> Unsubscribe() -> updateEmailIsSubscribing(user.email, false)
 

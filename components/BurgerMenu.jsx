@@ -20,7 +20,7 @@ export default function BurgerMenu({user}) {
             </button>
 
             {showMenu &&
-                <div className="fixed inset-0 bg-primary/95 h-[100dvh] z-20 flex flex-col justify-between pb-28">
+                <div className="fixed inset-0 bg-primary/95 h-dvh z-20 flex flex-col justify-between pb-10">
                     <div className="w-full flex flex-col">
                         <button onClick={ToggleMenu} className="p-4 sm:p-8 text-white self-end" aria-label="Close menu">
                             <X size={35} />

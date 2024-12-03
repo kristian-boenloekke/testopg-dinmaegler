@@ -1,8 +1,9 @@
 'use client'
 import { useAuth } from '@/contexts/AuthProvider'
 import { useToast } from '@/contexts/ToastProvider'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Unsubscribe } from './SubscriptionRCC'
+import { getCurrentUser } from '@/lib/auth'
 
 export default function FormContact() {
     const [formData, setFormData] = useState({
@@ -81,90 +82,90 @@ export default function FormContact() {
 
     return (
         <div className='border border-gray-300 p-6'>
-            <Unsubscribe text={'frameld'} />
-        <form onSubmit={handleSubmit} className=" w-full">
-            <div className="flex flex-col lg:flex-row gap-4 pb-4">
-                <label htmlFor="name" className="flex flex-col gap-2 font-semibold w-full">
-                    Navn
-                    <input
-                        type="text"
-                        id="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className={`border p-2 font-normal outline-none ${errors.name ? 'border-red-500' : 'border-gray-300'
-                            }`}
-                        placeholder="Indtast dit navn"
-                    />
-                    {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
-                </label>
-                <label htmlFor="email" className="flex flex-col gap-2 font-semibold w-full">
-                    Email
-                    <input
-                        type="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className={`border p-2 font-normal outline-none ${errors.email ? 'border-red-500' : 'border-gray-300'
-                            }`}
-                        placeholder="Indtast din email"
-                    />
-                    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-                </label>
-            </div>
-            <div className="flex flex-col gap-4">
-                <label htmlFor="subject" className="flex flex-col gap-2 font-semibold">
-                    Emne
-                    <input
-                        type="text"
-                        id="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className={`border p-2 font-normal outline-none ${errors.subject ? 'border-red-500' : 'border-gray-300'
-                            }`}
-                        placeholder="Indtast emne"
-                    />
-                    {errors.subject && <p className="text-red-500 text-sm">{errors.subject}</p>}
-                </label>
 
-                <label htmlFor="message" className="flex flex-col gap-2 font-semibold">
-                    Besked
-                    <textarea
-                        id="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className={`border p-2 font-normal outline-none min-h-40 ${errors.message ? 'border-red-500' : 'border-gray-300'
-                            }`}
-                        placeholder="Indtast din besked"
-                    />
-                    {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
-                </label>
-            </div>
-
-            <div className="flex flex-col gap-4 py-2">
-                {user && userSubscription?.isSubscribing ? null : (
-
-                    <label htmlFor="newsletter" className="text-sm text-primary3 flex items-center">
+            <form onSubmit={handleSubmit} className=" w-full">
+                <div className="flex flex-col lg:flex-row gap-4 pb-4">
+                    <label htmlFor="name" className="flex flex-col gap-2 font-semibold w-full">
+                        Navn
                         <input
-                            type="checkbox"
-                            id="newsletter"
-                            checked={formData.newsletter}
+                            type="text"
+                            id="name"
+                            value={formData.name}
                             onChange={handleChange}
-                            className="mr-2"
+                            className={`border p-2 font-normal outline-none ${errors.name ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            placeholder="Indtast dit navn"
                         />
-                        Ja tak, jeg vil gerne modtage Din Mæglers nyhedsbrev
+                        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                     </label>
-                )}
+                    <label htmlFor="email" className="flex flex-col gap-2 font-semibold w-full">
+                        Email
+                        <input
+                            type="email"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className={`border p-2 font-normal outline-none ${errors.email ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            placeholder="Indtast din email"
+                        />
+                        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                    </label>
+                </div>
+                <div className="flex flex-col gap-4">
+                    <label htmlFor="subject" className="flex flex-col gap-2 font-semibold">
+                        Emne
+                        <input
+                            type="text"
+                            id="subject"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            className={`border p-2 font-normal outline-none ${errors.subject ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            placeholder="Indtast emne"
+                        />
+                        {errors.subject && <p className="text-red-500 text-sm">{errors.subject}</p>}
+                    </label>
 
-                <button
-                    type="submit"
-                    className="bg-primary text-white py-2 px-4 mt-2 hover:bg-primary3 self-start"
-                >
-                    Send Besked
-                </button>
+                    <label htmlFor="message" className="flex flex-col gap-2 font-semibold">
+                        Besked
+                        <textarea
+                            id="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            className={`border p-2 font-normal outline-none min-h-40 ${errors.message ? 'border-red-500' : 'border-gray-300'
+                                }`}
+                            placeholder="Indtast din besked"
+                        />
+                        {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
+                    </label>
+                </div>
 
-            </div>
+                <div className="flex flex-col gap-4 py-2">
+                    {user && userSubscription?.isSubscribing ? null : (
 
-        </form>
+                        <label htmlFor="newsletter" className="text-sm text-primary3 flex items-center">
+                            <input
+                                type="checkbox"
+                                id="newsletter"
+                                checked={formData.newsletter}
+                                onChange={handleChange}
+                                className="mr-2"
+                            />
+                            Ja tak, jeg vil gerne modtage Din Mæglers nyhedsbrev
+                        </label>
+                    )}
+
+                    <button
+                        type="submit"
+                        className="bg-primary text-white py-2 px-4 mt-2 hover:bg-primary3 md:self-start"
+                    >
+                        Send Besked
+                    </button>
+
+                </div>
+
+            </form>
             {user && userSubscription?.isSubscribing ? (
 
                 <div className='text-sm flex flex-wrap gap-1 pt-4'>

@@ -22,7 +22,6 @@ export default async function Account() {
     return (
         <>
            <BannerHeading heading="Min Konto" />
-           <Unsubscribe text={"Klik her for at framelde vores nyhedsbrev"} className="text-red-500" />
             <div className="global-padding flex flex-col justify-between min-h-[50vh]">
                 <div className="flex flex-col gap-10">
                 <p className="text-center text-3xl">Velkommen {user.username}</p>

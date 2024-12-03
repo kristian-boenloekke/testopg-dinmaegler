@@ -97,7 +97,7 @@ function ImageModal({ home, setShowImageModal, activeModalContent, setActiveModa
     return (
         <>
 
-            <div className="fixed inset-0 z-50 flex flex-col h-[100dvh] justify-between bg-black/90">
+            <div className="fixed inset-0 z-50 flex flex-col h-dvh bg-black/90">
                 <button
                     onClick={() => setShowImageModal(false)}
                     className="self-end p-4 sm:p-8 text-white"

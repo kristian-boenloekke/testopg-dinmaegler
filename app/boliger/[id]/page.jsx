@@ -4,6 +4,7 @@ import Image from 'next/image'
 import DetailTable from '../_components/DetailTable';
 import CardEstate from '@/components/CardEstate';
 import Description from '../_components/Description';
+import ScrollableList from '../_components/ScrollableList';
 
 
 export async function generateStaticParams() {
@@ -73,13 +74,14 @@ export default async function Home({ params }) {
                     </div>
                 </section>
             </div>
-            <ul className="flex overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar shadow-xl">
+            {/* <ul className="flex overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar shadow-xl">
                 {homes.map((home) => (
                     <li key={home.id} className="inline-block">
                         <CardEstate home={home} variant="small" />
                     </li>
                 ))}
-            </ul>
+            </ul> */}
+            <ScrollableList homes={homes} />
         </>
     )
 }

@@ -25,11 +25,11 @@ export default function RadixSlider({ minPrice, maxPrice, onChange }) {
                 minStepsBetweenThumbs={1000}
                 aria-label="Price Range"
             >
-                <Slider.Track className="bg-gray-200 relative grow rounded-full h-2">
-                    <Slider.Range className="absolute bg-gray-500 rounded-full h-full" />
+                <Slider.Track className="bg-gray-200 relative grow rounded-full h-1.5">
+                    <Slider.Range className="absolute bg-gray-300 rounded-full h-full" />
                 </Slider.Track>
-                <Slider.Thumb className="block w-4 h-4 bg-gray-500 rounded-full shadow-lg focus:outline-none" />
-                <Slider.Thumb className="block w-4 h-4 bg-gray-500 rounded-full shadow-lg focus:outline-none" />
+                <Slider.Thumb className="block w-3 h-3 bg-gray-300 rounded-full shadow-lg focus:outline-none" />
+                <Slider.Thumb className="block w-3 h-3 bg-gray-300 rounded-full shadow-lg focus:outline-none" />
             </Slider.Root>
 
             {/* Display Min and Max Price */}
