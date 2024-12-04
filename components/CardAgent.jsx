@@ -7,7 +7,7 @@ export default function CardAgent({ agent, variant = false }) {
             {variant ?
                 (
                     <article className='grid grid-cols-1 sm:grid-cols-2 gap-4 p-2 min-h-60'>
-                        <Link href={`/medarbejdere/${agent.id}`} className='relative'>
+                        <Link href={`/medarbejdere/${agent.id}`} className='relative' prefetch>
                             <Image src={agent.image.url} alt={agent.name} width={800} height={533} className="w-full h-full object-cover" />
                             <div className='absolute bottom-3 left-0 bg-primary z-10 flex gap-5 items-center p-2 px-5'>
                                 <Image src={'/img/instagram-logo-white.svg'} alt='instagram' width={20} height={20}></Image>
@@ -35,7 +35,7 @@ export default function CardAgent({ agent, variant = false }) {
                     </article>
                 ) : (
                     <article className='flex flex-col justify-between gap-2 shadow-md pb-4 h-full'>
-                        <Link href={`/medarbejdere/${agent.id}`}>
+                        <Link href={`/medarbejdere/${agent.id}`} prefetch>
                             {agent?.image ?
                                 <Image src={agent.image.url} alt={agent.name} width={800} height={533} className="w-full h--full object-cover" />
                                 :

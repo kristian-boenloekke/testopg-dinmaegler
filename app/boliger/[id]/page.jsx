@@ -2,28 +2,43 @@ import CardAgent from '@/components/CardAgent';
 import EstateMenu from '../_components/EstateMenu';
 import Image from 'next/image'
 import DetailTable from '../_components/DetailTable';
-import CardEstate from '@/components/CardEstate';
 import Description from '../_components/Description';
 import ScrollableList from '../_components/ScrollableList';
 
 
 export async function generateStaticParams() {
-    const homes = await fetch('https://dinmaegler.onrender.com/homes', { 
+    try {
+      const response = await fetch('https://dinmaegler.onrender.com/homes', { 
         cache: 'force-cache',
-      })
-      .then(r => r.json())
-    
-    return homes.map((home) => ({
-      id: home.id.toString(),
-    }))
+        next: { revalidate: 3600 } 
+      });
+      
+      const homes = await response.json();
+      
+      return homes.map((home) => ({
+        id: home.id.toString(),
+      }));
+    } catch (error) {
+      console.error('Failed to generate static params:', error)
+      return []
+    }
   }
+
+
 export default async function Home({ params }) {
     const awaitedParams = await params
     const id = awaitedParams.id
-    const home = await fetch(`https://dinmaegler.onrender.com/homes/${id}`, { cache: 'force-cache' }).then(r => r.json())
-    const homes = await fetch('https://dinmaegler.onrender.com/homes').then(r => r.json())
     
-    
+    const [home, homes] = await Promise.all([
+        fetch(`https://dinmaegler.onrender.com/homes/${id}`, { 
+          cache: 'force-cache',
+          next: { revalidate: 3600 }
+        }).then(r => r.json()),
+        fetch('https://dinmaegler.onrender.com/homes', { 
+          cache: 'force-cache',
+          next: { revalidate: 3600 }
+        }).then(r => r.json())
+      ])
 
 
     return (
@@ -74,13 +89,6 @@ export default async function Home({ params }) {
                     </div>
                 </section>
             </div>
-            {/* <ul className="flex overflow-x-auto overflow-y-hidden whitespace-nowrap no-scrollbar shadow-xl">
-                {homes.map((home) => (
-                    <li key={home.id} className="inline-block">
-                        <CardEstate home={home} variant="small" />
-                    </li>
-                ))}
-            </ul> */}
             <ScrollableList homes={homes} />
         </>
     )

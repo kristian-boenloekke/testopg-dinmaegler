@@ -16,7 +16,7 @@ export default function CardEstate({ home, variant = false }) {
             <article className={`flex flex-col shadow-md 
                 lg:p-4 lg:flex-row lg:justify-between`
             }>
-                <Link href={`/boliger/${home.id}`} className="flex flex-col lg:flex-row lg:justify-between">
+                <Link href={`/boliger/${home.id}`} className="flex flex-col lg:flex-row lg:justify-between" prefetch>
                     <Image
                         src={home.images[0].url} alt={home.images[0].name}
                         width={1400} height={934}
@@ -56,7 +56,7 @@ export default function CardEstate({ home, variant = false }) {
 
     if (variant === "small") {
         return (
-            <Link href={`/boliger/${home.id}`}>
+            <Link href={`/boliger/${home.id}`} prefetch>
                 <article className="flex flex-col min-w-60">
                     <div className="relative w-full h-full">
                         <Image
@@ -78,7 +78,7 @@ export default function CardEstate({ home, variant = false }) {
 
         <article className="flex flex-col shadow-md relative w-full h-full">
             <LikeButton className={"absolute top-2 right-2"} home={home} />
-            <Link href={`/boliger/${home.id}`}>
+            <Link href={`/boliger/${home.id}`} prefetch>
                 <Image
                     src={home.images[0].url} alt={home.images[0].name}
                     width={1400} height={934}

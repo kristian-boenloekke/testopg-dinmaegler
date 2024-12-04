@@ -7,7 +7,7 @@ import SearchForm from '@/components/FormSearch';
 import { Subscribe } from '@/components/SubscriptionRCC';
 
 export const dynamic = 'force-static'
-export const revalidate = 100
+export const revalidate = 120
 
 async function fetchHomes() {
   const response = await fetch('https://dinmaegler.onrender.com/homes', {
@@ -20,7 +20,7 @@ async function fetchHomes() {
 async function fetchAgents() {
   const response = await fetch('https://dinmaegler.onrender.com/agents', {
     next: { revalidate: 3600 }
-  });
+  })
   if (!response.ok) throw new Error('Failed to fetch agents')
   return response.json()
 }
