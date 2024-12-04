@@ -7,7 +7,7 @@ import SearchForm from '@/components/FormSearch';
 import { Subscribe } from '@/components/SubscriptionRCC';
 
 export const dynamic = 'force-static'
-export const revalidate = 120
+export const revalidate = 1800
 
 async function fetchHomes() {
   const response = await fetch('https://dinmaegler.onrender.com/homes', {
